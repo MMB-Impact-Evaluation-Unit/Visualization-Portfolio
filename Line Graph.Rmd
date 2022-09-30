@@ -1,0 +1,47 @@
+---
+title: "Line Graph"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(lubridate)
+library(mmbtools)
+library(datasets)
+
+mmb_load_fonts()
+```
+
+```{r}
+## BASIC LINE PLOT
+diamonds %>%
+    filter(cut=="Good") %>%
+    filter(color == "D") %>%
+    ggplot(aes(x=carat, y=price)) +
+    geom_line() +
+    labs(title = "Comparing Carat Size and Price"
+         ,x="Carats",y="Price") +
+    theme_mmb_basic(axis.text = element_text(size=12)
+                    ,panel.grid.major.x = element_line())
+```
+
+```{r}
+## BASIC LINE PLOT WITH MMB COLORS
+diamonds %>%
+    filter(cut=="Good") %>%
+    filter(color == "D") %>%
+    ggplot(aes(x=carat, y=price, color=clarity)) +
+    geom_line(size=1) +
+    #scale_color_mncol(palette = "main") +
+    scale_color_manual("Legend", values = c("#003685","#78BE21","#008EAA",
+                                            "#8D3F2B","#5D295F","#FFC845",
+                                            "#97999B","#A6192E")) +
+    labs(title = "Comparing Carat Size and Price by Clarity"
+         ,x="Carats",y="Price") +
+    theme_mmb_basic(legend.position = "bottom"
+                    ,axis.text = element_text(size=12)
+                    ,panel.grid.major.x = element_line())
+```
+
