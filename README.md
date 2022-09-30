@@ -5,6 +5,3 @@
 ## 2. Simple Bar Chart with Facet (09.30.22)
 ![2  Simple Bar Chart_facet (09 30 22)](https://user-images.githubusercontent.com/57459306/193311211-71b7cfaa-2b05-4f07-95e4-ed0f3f340120.png)
 
-
-
-![2  Simple Bar Chart_facet (09 30 22)](https://user-images.githubusercontent.com/57459306/193317063-17192174-1127-49e2-b22c-011fea29757b.png)
