@@ -24,10 +24,15 @@ p1 <- diamonds %>%
     geom_line() +
     labs(title = "Comparing Carat Size and Price"
          ,x="Carats",y="Price") +
-    theme_mmb_basic(axis.text = element_text(size=12)
+    theme_mmb_basic(axis.text.x = element_text(size=14)
+                    ,axis.text.y = element_text(size=14)
+                    ,axis.title.x = element_text(size=16)
+                    ,axis.title.y = element_text(size=16)
+                    ,legend.text = element_text(size=14)
+                    ,legend.title = element_text(size=14)
                     ,panel.grid.major.x = element_line())
 
-ggsave("Line Chart 1.png", p1, dpi=800, width= 450, height=250, units="mm")
+ggsave("Line Chart 1.png", p1, dpi=800, width= 375, height=250, units="mm")
 ```
 
 ```{r}
@@ -43,10 +48,15 @@ p2 <- diamonds %>%
                                             "#97999B","#A6192E")) +
     labs(title = "Comparing Carat Size and Price by Clarity"
          ,x="Carats",y="Price") +
-    theme_mmb_basic(legend.position = "bottom"
-                    ,axis.text = element_text(size=12)
+    theme_mmb_basic(axis.text.x = element_text(size=14)
+                    ,axis.text.y = element_text(size=14)
+                    ,axis.title.x = element_text(size=16)
+                    ,axis.title.y = element_text(size=16)
+                    ,legend.text = element_text(size=16)
+                    ,legend.title = element_text(size=16)
+                    ,legend.position = "bottom"
                     ,panel.grid.major.x = element_line())
 
-ggsave("Line Chart 2.png", p2, dpi=800, width= 450, height=250, units="mm")
+ggsave("Line Chart 2.png", p2, dpi=800, width= 375, height=250, units="mm")
 ```
 
