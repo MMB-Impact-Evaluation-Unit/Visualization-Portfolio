@@ -7,7 +7,7 @@
 
 # Line Chart
 ## 1. Simple Line Chart (10.03.22)
-![Line Chart 1](https://user-images.githubusercontent.com/57459306/193595263-4586fb65-3eb0-4513-9729-aac16daad640.png)
+![Line Chart 1](https://user-images.githubusercontent.com/57459306/193597712-f73b0a04-e2d8-49af-9519-f50726787e0a.png)
 
 ## 2. Simple Line Chart Grouped by Variable (10.03.22)
-![Line Chart 2](https://user-images.githubusercontent.com/57459306/193595445-c7daada6-ec7d-42a2-9cc7-8139de497c97.png)
+![Line Chart 2](https://user-images.githubusercontent.com/57459306/193597744-e07302c3-de1c-4d68-9a59-d92d7bc83c6d.png)
