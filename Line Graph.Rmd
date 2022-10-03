@@ -1,5 +1,6 @@
 ---
 title: "Line Graph"
+author: Katie Kotasek
 output: html_document
 editor_options: 
   chunk_output_type: console
@@ -16,7 +17,7 @@ mmb_load_fonts()
 
 ```{r}
 ## BASIC LINE PLOT
-diamonds %>%
+p1 <- diamonds %>%
     filter(cut=="Good") %>%
     filter(color == "D") %>%
     ggplot(aes(x=carat, y=price)) +
@@ -25,11 +26,13 @@ diamonds %>%
          ,x="Carats",y="Price") +
     theme_mmb_basic(axis.text = element_text(size=12)
                     ,panel.grid.major.x = element_line())
+
+ggsave("Line Chart 1.png", p1, dpi=800, width= 450, height=250, units="mm")
 ```
 
 ```{r}
 ## BASIC LINE PLOT WITH MMB COLORS
-diamonds %>%
+p2 <- diamonds %>%
     filter(cut=="Good") %>%
     filter(color == "D") %>%
     ggplot(aes(x=carat, y=price, color=clarity)) +
@@ -43,5 +46,7 @@ diamonds %>%
     theme_mmb_basic(legend.position = "bottom"
                     ,axis.text = element_text(size=12)
                     ,panel.grid.major.x = element_line())
+
+ggsave("Line Chart 2.png", p2, dpi=800, width= 450, height=250, units="mm")
 ```
 
