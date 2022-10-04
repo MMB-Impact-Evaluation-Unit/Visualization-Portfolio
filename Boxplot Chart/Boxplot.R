@@ -51,4 +51,4 @@ p2 <- diamonds %>%
                     panel.grid.major.x = element_line())
 
 # Save as PNG
-ggsave("Boxplot Chart 2.png", p2, dpi = 800, width = 350, height = 275, units = "mm")
+ggsave("Boxplot Chart 2.png", p2, dpi = 600, width = 325, height = 275, units = "mm")
