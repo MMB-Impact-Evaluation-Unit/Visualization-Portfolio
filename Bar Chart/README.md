@@ -7,3 +7,6 @@
 
 ## Simple Bar Chart (Horizontal) (10.11.22)
 ![Simple Bar Chart (horizontal) (10 11 22)](https://user-images.githubusercontent.com/57459306/195168140-1aef0f1a-3654-4a8f-a922-bfb3f1f3b401.png)
+
+## Stacked Bar Chart (10.11.22)
+![Stacked Bar Chart (10 11 22)](https://user-images.githubusercontent.com/57459306/195179685-4628214d-1e87-4666-aac5-1c772ee9d8a5.png)
