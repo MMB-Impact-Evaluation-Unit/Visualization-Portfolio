@@ -4,3 +4,4 @@
 ## Diverging Plot
 ## Line Chart
 ## Sankey Diagram
+## Scatterplot
