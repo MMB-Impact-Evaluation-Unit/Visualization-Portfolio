@@ -1,0 +1,153 @@
+---
+title: "MMB Themed Bar Chart Using Cowplot"
+author: "Katie Kotasek"
+date: "2022-10-19"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+library(cowplot)  # used to combine multiple plots into a single plot
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+```{r}
+## SET STANDARD OUTPUT THEME ##
+report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            text = ggplot2::element_text(family = "Calibri",color = "#53565A", size=8),
+            plot.title = ggplot2::element_text(size = 12, hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 10),
+            legend.title = ggplot2::element_text(size = 10),
+            plot.caption = ggplot2::element_text(size=8),
+            axis.title.x = ggplot2::element_text(size = 9), # crt update 10/12
+            axis.title.y = ggplot2::element_text(size = 9, angle=90), # crt update 10/12
+            plot.background = ggplot2::element_rect(fill = "#ffffff", color = NA),
+            legend.key.size = unit(0.5,"line")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+## CREATE DATA SETS ##
+data <- diamonds %>%
+  filter(cut %in% c("Very Good","Premium","Ideal"))
+
+d1 <- data %>%
+    group_by(color) %>%
+    mutate(total = n()) %>%
+    ungroup() %>%
+    group_by(color,cut) %>%
+    mutate(count = n()) %>%
+    ungroup() %>%
+    mutate(percent = count/total
+           # Paste N value so it displays on the x-axis
+           ,color = paste(color, "\n(N = ", total, ")", sep="")) %>%
+    select(color, cut, percent) %>%
+    distinct()
+
+d2 <- data %>%
+    group_by(clarity) %>%
+    mutate(total = n()) %>%
+    ungroup() %>%
+    group_by(clarity,cut) %>%
+    mutate(count = n()) %>%
+    ungroup() %>%
+    mutate(percent = count/total
+           # Paste N value so it displays on the x-axis
+           ,clarity = paste(clarity, "\n(N = ", total, ")", sep="")) %>%
+    select(clarity, cut, percent) %>%
+    distinct()
+d3 <- data %>%
+    mutate(carat_class = ifelse(carat > 1.0,"Big","Small")) %>%
+    group_by(carat_class) %>%
+    mutate(total = n()) %>%
+    ungroup() %>%
+    group_by(carat_class, cut) %>%
+    mutate(count = n()) %>%
+    ungroup() %>%
+    mutate(percent = count/total
+           # Paste N value so it displays on the x-axis
+           ,carat_class = paste(carat_class, "\n(N = ", total, ")", sep="")) %>%
+    select(carat_class, cut, percent) %>%
+    distinct()
+```
+
+```{r}
+## CREATE PLOT 1 ##
+p1 <- ggplot(d1, aes(x=color,y=percent, fill = cut)) +
+    geom_bar(stat="identity", position=position_dodge(0.9)) +
+    scale_fill_manual("Legend", values=c("#003865", "#78BE21", "#8D3F2B")) +
+    coord_cartesian(ylim=c(0,1.0)) +
+    labs(title = "Color", y="Percent") +
+    report_theme(
+        axis.title.x = element_blank()
+    )
+## CREATE PLOT 2 ##
+p2 <- ggplot(d2, aes(x=clarity,y=percent, fill = cut)) +
+    geom_bar(stat="identity", position=position_dodge(0.9)) +
+    scale_fill_mncol() +
+    coord_cartesian(ylim=c(0,1.0)) +
+    labs(title = "Clarity", y="Percent", x="") +
+    report_theme(
+        axis.title.x = element_blank()
+        ,axis.title.y = element_blank()
+        ,axis.text.x = element_blank()
+    )
+## CREATE PLOT 3 ##
+p3 <- ggplot(d3, aes(x=carat_class,y=percent, fill = cut)) +
+  geom_bar(stat="identity", position=position_dodge(0.9)) +
+  scale_fill_mncol() +
+  coord_cartesian(ylim=c(0,1.0)) +
+  labs(title="Class", y="Percent") +
+  report_theme(
+      axis.ticks.y = element_blank()
+      ,axis.text.y = element_blank()
+      ,axis.title.y = element_blank()
+      ,axis.title.x = element_blank()
+  )
+## GET OVERALL PLOT LEGEND FROM PLOT 1 ##
+legend <- get_legend(
+  p1 +
+    report_theme(
+      legend.position = "bottom",
+      legend.justification = "left",
+      legend.box.just = "left"
+    )
+)
+## DISPLAY PLOT 1 AND 3 ON THE SAME ROW ##
+plot_row_1 <- plot_grid(
+  p1 + theme(legend.position="none"),
+  p3 + theme(legend.position="none"), 
+  rel_widths = c(1.0,0.5))
+
+## DISPLAY PLOT 2 BY ITSELF ##
+plot_row_2 <- p2 + report_theme(legend.position = "none")
+
+## DISPLAY ALL PLOT OBJECTS AS SINGLE PLOT ##
+plot_grid(
+  plot_row_1, 
+  plot_row_2, 
+  legend,
+  ncol = 1,
+  rel_heights = c(1,1,0.25), 
+  hjust=-1
+) + 
+  theme_mmb_basic()
+
+## SAVE PLOT AS A PNG WITH STANDARD OUTPUT SIZE ## 
+ggsave(
+  filename = "MMB Bar Chart.png",
+  width=6.5, # Maximum plot width
+  height=6.5 * 10/16, # Scale this however you want. Current is 16:10
+  units="in"
+)
+```
+
