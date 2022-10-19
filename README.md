@@ -5,3 +5,4 @@
 ## Line Chart
 ## Sankey Diagram
 ## Scatterplot
+## Lollipop Chart
