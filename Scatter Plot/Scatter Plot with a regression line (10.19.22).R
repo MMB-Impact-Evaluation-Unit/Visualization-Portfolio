@@ -1,4 +1,4 @@
-# Stacked Bar Chart
+# Scatter plot with a regression line
 ## Author : Yuna Loesch
 ## 10.19.22
 
