@@ -75,8 +75,9 @@ anim_earn <- earnFiltered %>%
     ggplot(aes(x = n_persons, y=median_weekly_earn, size = median_weekly_earn, color = age)) +
     geom_point() +
     # set color scheme for the bubbles
-    scale_color_manual("Color Legend", values = c("#003685", "#78BE21", "#008EAA", "#A4BCC2", "#FFC845",
-                                                  "#F5E1A4", "#A6192E")) +
+    scale_color_manual("Color Legend", values = c("#003865", "#78BE21", "#8D3F2B",
+                                                  "#5D295F", "#008EAA", "#0D5257",
+                                                  "#A4BCC2")) +
     scale_y_continuous(limits = c(0, 1250)) +
     scale_size(range = c(1, 12), name="Median Weekly Earnings") +
     labs(title = "Animated Bubble Plot of Quarter 1 Median Weekly Earnings",
