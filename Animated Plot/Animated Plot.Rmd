@@ -36,7 +36,7 @@ earnFiltered %>%
     ggplot(aes(x=n_persons, y=median_weekly_earn, size = median_weekly_earn, color = age)) +
     geom_point(alpha=0.8) +
     scale_y_continuous(limits = c(0, 1250)) +
-    scale_color_manual("Legend", values = c("#003865", "#78BE21", "#8D3F2B",
+    scale_color_manual("Color Legend", values = c("#003865", "#78BE21", "#8D3F2B",
                                             "#5D295F", "#008EAA", "#0D5257",
                                             "#A4BCC2")) +
     scale_size(range = c(.1, 12), name="Median Weekly Earnings") +
@@ -47,9 +47,9 @@ earnFiltered %>%
        y = "Median Weekly Earnings") +
     theme_mmb_basic(plot.title = element_text(size = 14),
                     plot.title.position = "plot",
-                    legend.position = "none",
+                    legend.position = "right",
                     legend.title = element_text(size = 10),
-                    legend.text = element_text(size = 8),
+                    legend.text = element_text(size = 10),
                     axis.ticks.x = element_line(),
                     axis.text.x = element_text(size = 10),
                     axis.text.y = element_text(size = 10),
@@ -58,14 +58,6 @@ earnFiltered %>%
                     plot.caption = element_text(size = 8, face = "italic"),
                     plot.subtitle = element_text(size = 12),
                     panel.grid.major.y = element_line())
-
-## SAVE AS PNG ##
-ggsave(
-    filename = "Static Bubble Plot.png",
-    width=6.5, # Maximum plot width
-    height=6.5 * 10/16, # Scale this however you want. Current is 16:10
-    units="in"
-)
 ```
 
 ```{r}
