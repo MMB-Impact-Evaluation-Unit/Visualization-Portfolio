@@ -15,7 +15,7 @@ library(gganimate)  # animation package
 
 mmb_load_fonts(quiet = TRUE)
 
-options(scipen=999)
+options(scipen=999)  # prevents scientific notation displaying
 ```
 
 ```{r}
