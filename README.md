@@ -1,4 +1,4 @@
-# Visualization-Portfolio Index
+# Visualization Portfolio Index
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
   - Animated Plot
 ## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
