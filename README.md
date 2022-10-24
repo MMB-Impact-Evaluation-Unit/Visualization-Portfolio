@@ -2,7 +2,7 @@
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
   - Static Bubble Plot
   - Animated Bubble Plot
-## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
+## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bar%20Chart)
    - Simple Bar Chart
    - Simple Bar Chart with Facet
    - Simple Bar Chart (Horizontal)
