@@ -6,4 +6,5 @@
 ![Line Chart 2](https://user-images.githubusercontent.com/57459306/193597744-e07302c3-de1c-4d68-9a59-d92d7bc83c6d.png)
 
 ## 3. Line Chart By Group With Confidence Intervals (10.25.22)
+LineChart.Rmd
 ![Line Chart 3](https://user-images.githubusercontent.com/57459306/197861146-7090e2f5-2a3e-4fd9-b4f2-90691cd2fc10.png)
