@@ -1,0 +1,99 @@
+---
+title: "Chick Weight"
+output: html_document
+date: "2022-10-25"
+---
+
+```{r}
+library(tidyverse)
+library(mmbtools)
+library(cowplot)
+library(geepack)
+```
+
+```{r}
+ChickWeightDf <- ChickWeight %>% 
+  as_tibble() %>% 
+  mutate(
+    Time = as.factor(Time),
+    Chick = as.factor(Chick),
+    Diet = as.factor(Diet),
+    weight = as.numeric(weight)
+  )
+```
+
+```{r}
+# model
+wgt_gee <- geeglm(
+  weight ~ Time*Diet,
+  data = ChickWeightDf,
+  id = Chick
+)
+
+wgt_summary <- tidy(wgt_gee, conf.int = T) %>% 
+  filter(str_detect(term, "Time\\d+:Diet\\d+")) %>% 
+  mutate(rel_risk = exp(estimate), 
+         lcl_rr = exp(conf.low), 
+         ucr_rr = exp(conf.high))
+
+wgt_em_joint <- emmeans::joint_tests(wgt_gee) %>% 
+  filter(`model term` == "Time:Diet") %>% 
+  select(`model term`, p.value)
+
+wgt_em <- 
+  emmeans::emmeans(
+    wgt_gee, 
+    c("Diet", "Time"),
+    type = "response"
+  ) %>% 
+  data.frame() %>% 
+  select(
+    Diet, Time, 
+    emmean,
+    ci_low = asymp.LCL,
+    ci_high = asymp.UCL
+  )
+```
+
+```{r}
+# plotting
+p <- wgt_em %>% 
+  mutate(Diet = factor(Diet, labels = c("1", "2", "3", "4"))) %>% 
+  # choose 2 arbitrary diets to compare
+  filter(Diet %in% c("1", "4")) %>% 
+  ggplot(
+    aes(
+      x = Time, y = emmean, 
+      ymin = ci_low, ymax = ci_high, 
+      group = Diet, color = Diet, fill = Diet
+    )
+  ) +
+  geom_ribbon(alpha = 0.50, size = 0, colour = NA) +
+  geom_point(size = 1.5) +
+  geom_line(size = 1) +
+  # give distinct labels between fill and color to parse out line and ribbon in legend
+  scale_color_manual(values = c("#003865", "#8D3F2B"), labels = c("Diet 1 - estimated mean weight", "Diet 4 - estimated mean weight")) +
+  scale_fill_manual(values = c("#003865", "#8D3F2B"), labels = c("Diet 1 - 95% confidence interval", "Diet 4 - 95% confidence interval")) +
+  theme_mmb_basic() +
+  theme(legend.position = "bottom") +
+  labs(
+    y = "Weight",
+    x = "Time",
+    fill = NULL,
+    color = NULL
+  ) +
+  # reconfigure legend
+  guides(color=guide_legend(nrow=2,byrow=TRUE,override.aes = list(fill=NA), order=2)) +
+  guides(fill=guide_legend(nrow=2,byrow=TRUE,override.aes = list(color=NA), order=1))
+```
+
+```{r}
+ggsave(
+  filename = here::here("img", "chicken_weight.png"),
+  plot = p,
+  width = 9,
+  height = 4,
+  units = "in"
+)
+```
+
