@@ -19,6 +19,7 @@
 ## [Line Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Line%20Chart)
   - Simple Line Chart
   - Simple Line Chart Grouped by Variable
+  - Line Chart By Group With Confidence Intervals
 ## [Lollipop Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Lollipop%20Chart)
   - Lollipop Chart1
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
