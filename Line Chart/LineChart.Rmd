@@ -7,7 +7,6 @@ date: "2022-10-25"
 ```{r}
 library(tidyverse)
 library(mmbtools)
-library(cowplot)
 library(geepack)
 ```
 
