@@ -30,3 +30,7 @@
   - Simple Scatter Plot
   - Scatter Plot with a line
   - Scatter Plot with a regression line
+## [Venn Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Venn%20Diagram)
+  - 2 ring Venn Diagram
+  - 3 ring Venn Diagram
+  - 4 ring Venn Diagram
