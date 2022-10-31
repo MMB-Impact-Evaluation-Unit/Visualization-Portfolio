@@ -14,6 +14,9 @@
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
   - Diverging Plot (likert package)
   - Diverging Plot (HH package)
+## [Histogram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Histogram)
+  - Simple Histogram
+  - Simple Histogram(By group)
 ## [Interactive Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Interactive%20Plot)
   - Interactive Plot
 ## [Line Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Line%20Chart)
