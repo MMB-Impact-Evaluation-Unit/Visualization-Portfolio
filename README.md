@@ -27,8 +27,9 @@
   - Lollipop Chart1
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
   - Basic Map (State Map Using MMB Colors)
-## [Pie Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Pie%20Chart)
+## [Pie Chart & Donut Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Pie%20Chart%20%26%20Donut%20Chart)
   - Pie Chart
+  - Donut Chart
 ## [Sankey Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Sankey%20Diagram)
   - Sankey Diagram
 ## [Scatter plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Scatter%20Plot)
