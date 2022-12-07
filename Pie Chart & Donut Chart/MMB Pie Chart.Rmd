@@ -1,0 +1,86 @@
+---
+title: "MMB Styled Pie Chart"
+author: "Katie Kotasek"
+date: "2022-12-07"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(mmbtools)
+library(readxl)
+
+mmbtools::mmb_load_fonts(quiet=TRUE)
+```
+
+```{r}
+pie_chart <- read_xlsx("Pie Chart Dummy Data.xlsx")
+```
+
+```{r}
+categories <- pie_chart %>%
+    mutate(total = n()) %>%
+    group_by(Status,Category1,Category2,Category3,Category4,total) %>%
+    summarise(count = n()) %>%
+    ungroup() %>%
+    mutate(percent = round((count/total) * 100,0)
+           ,label = paste(percent,"%", sep="")
+           ,group = case_when(Status=="Status 1" ~ paste("Status 1 (n = ", count, ")", sep="")
+                              ,Status=="Status 2" ~ paste("Status 2 (n = ", count, ")", sep="")
+                              ,Status=="Status 3" & !is.na(Category1) ~ paste("Status 3 and category 1 (n = ", count, ")", sep="")
+                              ,Status=="Status 3" & !is.na(Category2) ~ paste("Status 3 and category 2 (n = ", count, ")", sep="")
+                              ,Status=="Status 3" & !is.na(Category3) ~ paste("Status 3 and category 3 (n = ", count, ")", sep="")
+                              ,Status=="Status 3" & !is.na(Category4) ~ paste("Status 3 and category 4 (n = ", count, ")", sep=""))) %>%
+    # manually set y position values
+    mutate(ypos = case_when(count==279 ~ 75
+                            ,count==11 ~ 49
+                            ,count==43 ~ 45
+                            ,count==34 ~ 37
+                            ,count==157 ~ 23
+                            ,count==31 ~ 3)
+           # set x position value
+           ,xpos = 1.3
+           )
+```
+
+```{r}
+## DISPLAY PIE CHART
+categories %>%
+    ggplot(aes(x="", y=percent, fill=group)) +
+    geom_bar(stat="identity", width=1) +
+    # display percent values
+    geom_text(aes(x=xpos, y=ypos, label=label), size=2.5) +
+    # manually set colors
+    scale_fill_manual(values = c("#78BE21", "#008EAA", "#A4BCC2", "#F5E1A4",
+                                 "#97999B", "#B75B00", "#FFC845")) +
+    coord_polar("y", start=0) +
+    labs(title = "MMB Styled Pie Chart"
+         ,x = "", y = ""
+         ,fill = "Color Legend") +
+    theme_mmb_basic(
+        axis.text.y = element_blank()
+        ,axis.text.x = element_blank()
+        ,axis.ticks.y = element_blank()
+        ,axis.ticks.x = element_blank()
+        ,plot.title.position = "plot"
+        ,plot.caption.position = "plot"
+        ,plot.title = element_text(size=12)
+        ,plot.subtitle = element_text(size=10)
+        ,legend.title = element_text(size=10)
+        ,legend.text = element_text(size=8)
+        ,plot.caption = element_text(size=8, face="italic")
+    )
+```
+
+```{r}
+## SAVE AS PNG
+ggsave(
+  filename = "Pie Chart.png",
+  width=8, # Maximum plot width
+  height=9 * 10/16, # Scale this however you want. Current is 16:10
+  units="in"
+)
+```
+
