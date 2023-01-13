@@ -5,7 +5,7 @@
 ## Simple Correlation Plot (Circle)
 ![Corr2](https://user-images.githubusercontent.com/57459306/212346515-361195e2-cdef-42f5-b05c-16d773cc7f96.png)
 
-## Simple Correlation Plot (Uppder Triangle)
+## Simple Correlation Plot (Upper Triangle)
 ![Corr3](https://user-images.githubusercontent.com/57459306/212346527-8f42c4db-84f0-498f-9c1e-22729ee0dd4c.png)
 
 ## Simple Correlation Plot (Lower Triangle)
