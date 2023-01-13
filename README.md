@@ -11,6 +11,12 @@
 ## [Boxplot Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Boxplot%20Chart)
   - Boxplot Chart
   - Boxplot Chart with Jitter
+## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
+  - Simple Correlation Plot (Square)
+  - Simple Correlation Plot (Circle)
+  - Simple Correlation Plot (Upper Triangle)
+  - Simple Correlation Plot (Lower Triangle)
+  - Simple Correlation Plot (MMB Themes)
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
   - Diverging Plot (likert package)
   - Diverging Plot (HH package)
