@@ -1,6 +1,7 @@
-# Create a folder to hold the app.R file
-![Folder](https://user-images.githubusercontent.com/57459306/212973764-d32ebee8-c998-4676-8431-7461aafbe0c9.png)
+# Steps to execute shiny app
+## Create a folder to hold the app.R file
+![Step1](https://user-images.githubusercontent.com/57459306/212984400-5034b044-74c1-4154-8deb-d5fa3f29fec9.png)
 ## Run app.R file within the folder
-![Folder2](https://user-images.githubusercontent.com/57459306/212974186-1ebfd687-7d5f-4c69-bd6b-6dfe84201979.png)
+![Step2](https://user-images.githubusercontent.com/57459306/212984425-b0840e53-bda7-4c68-924a-1ffd7a4f9565.png)
 ## Click on Run App in RStudio
-![Step 3](https://user-images.githubusercontent.com/57459306/212976229-8d249153-f3ae-4c36-be8b-c92d9e38107f.png)
+![Step3](https://user-images.githubusercontent.com/57459306/212984436-b20e8e56-0d97-489c-8838-8f0f1033136b.png)
