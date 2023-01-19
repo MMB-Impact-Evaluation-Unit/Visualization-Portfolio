@@ -1,0 +1,131 @@
+---
+title: "Example tables using kableExtra package"
+author: "Katie Kotasek"
+date: "2023-01-17"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+options(knitr.kable.NA = '')
+library(tidyverse)
+library(mmbtools)
+library(knitr)
+library(kableExtra)
+library(readxl)
+
+mmbtools::mmb_load_fonts(quiet = TRUE)
+```
+
+```{r}
+# READ IN DUMMY DATA FILE
+kable_table <- read_xlsx("Dummy data for tables.xlsx")
+```
+
+<!-- SINGLE LONG TABLE -->
+```{r}
+kable(kable_table    #data set to use
+      ,col.names = c("Count", "Value")  #column names to display
+      ,align = "lc"   #set alignment for each column
+      ,table.attr = "style = \"color: black; \""
+      ,format.args = list(big.mark = ",")) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed","responsive", "bordered")
+                  ,full_width = FALSE
+                  ,position = "float_left") %>%
+    #add second (bottom) header
+    add_header_above(header = c("Ordered by county" = 2)  #text to display and set the number of columns to span across
+                     ,bold = TRUE
+                     ,align = "c"
+                     ,line = FALSE
+                     ,font_size = "small") %>%
+    #add first (top) header
+    add_header_above(header = c("Example of Single Kable Table" = 2)  #text to display and set the number of columns to span across
+                     ,bold = TRUE
+                     ,align = "c"
+                     ,line = FALSE
+                     ,font_size = "large") %>%
+    save_kable("Single Kable Table.pdf")  #save as PDF file
+```
+
+<!-- MULTIPLE TABLES SIDE BY SIDE -->
+```{r}
+# Split table into multiple data sets
+splitNum = ceiling(nrow(kable_table)/3)  #set how many data sets to create and this calculates how many rows will be in each
+table1 <- kable_table[1:splitNum,]
+table2 <- kable_table[(splitNum + 1) : (splitNum + 29),]
+table3 <- kable_table[(splitNum + 30) : nrow(kable_table),]
+```
+
+```{r}
+kables(list(
+    #configuration for table1
+    kable(table1
+          ,col.names = c("County", "Value")
+          ,align = "lc"
+          ,table.attr = "style = \"color: black; \""
+          ,format.args = list(big.mark = ",")) %>%
+        kable_styling(bootstrap_options = c("striped", "hover", "condensed","responsive", "bordered")
+                      ,full_width = FALSE
+                      ,position = "left") %>%
+        add_header_above(header = c("Ordered by county" = 2)
+                         ,bold = TRUE
+                         ,align = "c"
+                         ,line = FALSE,font_size = "small"
+                         ,background = "#003685"
+                         ,color = "#FFFFFF") %>%
+        add_header_above(header = c("Table 1" = 2)
+                         ,bold = TRUE
+                         ,align = "c"
+                         ,line = FALSE
+                         ,font_size = "large"
+                         ,background = "#003685"
+                         ,color = "#FFFFFF"),
+    #configuration for table2
+    kable(table2
+          ,col.names = c("County", "Value")
+          ,align = "lc"
+          ,table.attr = "style = \"color: black; \""
+          ,format.args = list(big.mark = ",")) %>%
+        kable_styling(bootstrap_options = c("striped", "hover", "condensed","responsive", "bordered")
+                      ,full_width = FALSE
+                      ,position = "left") %>%
+        add_header_above(header = c("Ordered by county" = 2)
+                         ,bold = TRUE
+                         ,align = "c"
+                         ,line = FALSE
+                         ,font_size = "small"
+                         ,background = "#003685"
+                         ,color = "#FFFFFF") %>%
+        add_header_above(header = c("Table 2" = 2)
+                         ,bold = TRUE
+                         ,align = "c"
+                         ,line = FALSE
+                         ,font_size = "large"
+                         ,background = "#003685"
+                         ,color = "#FFFFFF"),
+    #configuration for table3
+    kable(table3
+          ,col.names = c("County", "Value")
+          ,align = "lc"
+          ,table.attr = "style = \"color: black; \""
+          ,format.args = list(big.mark = ",")) %>%
+        kable_styling(bootstrap_options = c("striped", "hover", "condensed","responsive", "bordered")
+                      ,full_width = FALSE
+                      ,position = "left") %>%
+        add_header_above(header = c("Ordered by county" = 2)
+                         ,bold = TRUE
+                         ,align = "c"
+                         ,line = FALSE
+                         ,font_size = "small"
+                         ,background = "#003685"
+                         ,color = "#FFFFFF") %>%
+        add_header_above(header = c("Table 3" = 2)
+                         ,bold = TRUE
+                         ,align = "c"
+                         ,line = FALSE
+                         ,font_size = "large"
+                         ,background = "#003685"
+                         ,color = "#FFFFFF")))
+```
+
