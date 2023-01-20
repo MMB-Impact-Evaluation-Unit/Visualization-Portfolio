@@ -1,7 +1,7 @@
 # Static Bubble Plot
 ![Static Bubble Plot](https://user-images.githubusercontent.com/57459306/197033662-56d458c4-f87f-4e67-85b4-2a9dc0a5ca7d.png)
 <img src="https://user-images.githubusercontent.com/57459306/197033662-56d458c4-f87f-4e67-85b4-2a9dc0a5ca7d.png" width="800" />
-![Static Bubble Plot](/animated_plot.png)
+![Static Bubble Plot](animated_plot.png)
 
 
 
