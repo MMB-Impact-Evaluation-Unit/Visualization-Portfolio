@@ -1,1 +1,8 @@
-
+# Example 1 (gt)
+![gt table](https://user-images.githubusercontent.com/57459306/214092504-d0872255-989a-49af-b474-9863d48e90b9.png)
+# Example 2 (gtsummary)
+![gtsummary table](https://user-images.githubusercontent.com/57459306/214092548-a7c1fd67-b92e-4c38-b8fb-56b0d4808340.png)
+# Example 3 (kable)
+[Single Kable Table.pdf](https://github.com/mmbimpact/Visualization-Portfolio/files/10481625/Single.Kable.Table.pdf)
+# Example 4 (kable)
+![Side by Side Tables](https://user-images.githubusercontent.com/57459306/214092688-d8351316-a3d1-4a2f-b25f-64255b399f21.png)
