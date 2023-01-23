@@ -1,0 +1,86 @@
+---
+title: "my ridgelines"
+author: "ian w"
+date: "01.23.2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(ggridges)
+library(palmerpenguins)
+library(mmbtools)
+mmb_load_fonts(quiet=TRUE)
+
+```
+
+## Ridgeline Plots
+
+
+
+Ridgeline plots (aka joyplots) are overlapping density plots useful for visualizing variation in distributions among groups.
+
+This uses the ggridges package. An intro can be found here: https://cran.r-project.org/web/packages/ggridges/vignettes/introduction.html
+
+```{r data, echo=FALSE}
+
+data(package = 'palmerpenguins')
+
+penguins %>% 
+  count(species)
+penguins %>% 
+  group_by(species) %>% 
+  summarize(across(where(is.numeric), mean, na.rm = TRUE))
+
+View(penguins)
+
+```
+
+## Plots
+
+This creates ridgeline plot using the penguins data.
+
+```{r plot, echo=FALSE}
+
+ggplot(penguins, aes(y=as.factor(species),
+                      x=body_mass_g)) +
+  geom_density_ridges(alpha=0.5) +
+  scale_y_discrete(expand = c(0.01, 0)) +  
+  scale_x_continuous(expand = c(0, 0))+
+  theme(axis.text=element_text(size=10)) +
+  xlab("Body Mass (g)") +
+  ylab("Species")
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+ggplot(penguins, aes(y=island,
+                      x=body_mass_g,
+                      fill=species)) +
+  geom_density_ridges(alpha=0.25) +
+  scale_y_discrete(expand = c(0.01, 0)) +  
+  scale_x_continuous(expand = c(0, 0))
+```
+
+```{r}
+## apply MMB themes/titles
+ggplot(penguins, aes(y=island,
+                      x=body_mass_g,
+                      fill=species)) +
+  geom_density_ridges(alpha=0.25) +
+  scale_y_discrete(expand = c(0.01, 0)) +  
+  scale_x_continuous(expand = c(0, 0)) +
+  theme_mmb_basic() + #apply MMB tools
+  scale_fill_mncol(palette = "main") + #apply MMB colors
+  labs(title = "Penguin body mass by species/island",
+       x = "Body Mass(g)",
+       y = "Name of Island") +
+  theme(plot.title = element_text(hjust = 0.5)) #center title
+  
+  
+
+```
+
