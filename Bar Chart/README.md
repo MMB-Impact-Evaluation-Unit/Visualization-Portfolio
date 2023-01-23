@@ -12,4 +12,4 @@
 ![Stacked Bar Chart (10 11 22)](https://user-images.githubusercontent.com/57459306/195179685-4628214d-1e87-4666-aac5-1c772ee9d8a5.png)
 
 ## MMB Bar Chart
-![MMB Bar Chart](https://user-images.githubusercontent.com/57459306/196727730-a71005ea-8ade-4f42-9192-7dbc3c3d4f90.png)
+![MMB Bar Chart](https://user-images.githubusercontent.com/57459306/196727730-a71005ea-8ade-4f42-9192-7dbc3c3d4f90.png) 
