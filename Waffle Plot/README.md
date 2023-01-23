@@ -1,2 +1,2 @@
 # Waffle Plot
-![Waffle Plot](https://user-images.githubusercontent.com/57459306/213548586-a26e40d4-f3f2-4572-b2c3-2d7d714a8416.png)
+![Waffle Plot](https://user-images.githubusercontent.com/57459306/214091450-e1012cbf-122f-42f0-89f1-8c47885da453.png)
