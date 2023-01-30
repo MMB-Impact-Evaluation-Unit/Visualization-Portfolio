@@ -34,7 +34,9 @@ categories <- pie_chart %>%
                               ,Status=="Status 3" & !is.na(Category3) ~ paste("Status 3 and category 3 (n = ", count, ")", sep="")
                               ,Status=="Status 3" & !is.na(Category4) ~ paste("Status 3 and category 4 (n = ", count, ")", sep=""))) %>%
     # manually set y position values
-    mutate(ypos = case_when(count==279 ~ 75
+    ## ypos determins the pie position angle;
+    ## xpos determins how far out where the text would appear;
+    mutate(ypos = case_when(count==279 ~ 75 #manually calculated to fix the position
                             ,count==11 ~ 49
                             ,count==43 ~ 45
                             ,count==34 ~ 37
