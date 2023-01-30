@@ -57,7 +57,7 @@ categories %>%
     # manually set colors
     scale_fill_manual(values = c("#78BE21", "#008EAA", "#A4BCC2", "#F5E1A4",
                                  "#97999B", "#B75B00", "#FFC845")) +
-    coord_polar("y", start=0) +
+    coord_polar("y", start=0) + #start : in radian (pi = 180 degree, pi/2 = 90 degree, etc)
     labs(title = "MMB Styled Pie Chart"
          ,x = "", y = ""
          ,fill = "Color Legend") +
