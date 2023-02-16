@@ -1,7 +1,13 @@
 # Histogram
+Refresh the page if below visualization images are not showing**
+
 ## Simple Histogram(10.31.22)
-![Simple Histogram (10 31 22)](https://user-images.githubusercontent.com/57459306/199054854-a1c3b709-5a78-4d21-9d7b-43fa04ec81b6.png)
+![Simple Histogram (10 31 22)](https://drive.google.com/uc?export=view&id=19zah9dWNnMxwP_yP9q7G6PfvBy23mmbs)
+
+
 ## Simple Histogram(By group, 10.31.22)
-![Simple Histogram(by group, 10.31.22)](https://user-images.githubusercontent.com/57459306/199054876-1e6db3a4-f885-4ec8-8fff-ba8f03957759.png)
+![Simple Histogram(by group, 10.31.22)](https://drive.google.com/uc?export=view&id=1Q58TcoWrexNOR-LFE2cH0G_BL-lFDkbb)
+
+
 ## Ridgeline plot
-![Ridgeline plot](https://user-images.githubusercontent.com/57459306/212416655-107d5586-cb5e-4b31-9d3f-1fbf77da4d6a.png)
+![Ridgeline plot](https://drive.google.com/uc?export=view&id=1UW1OkdwVu9LEAUm880W86Kj0Dxu7SwCg)
