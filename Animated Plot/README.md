@@ -1,5 +1,6 @@
 # Static Bubble Plot
 Refresh the page if below visualization images are not showing**
+
 ![Static Bubble Plot](https://drive.google.com/uc?export=view&id=12UCT3ZpCD54-q9eCKXNwlsZk2xCSi0GW)
 
 # Animated Bubble Plot
