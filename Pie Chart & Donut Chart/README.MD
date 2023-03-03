@@ -6,4 +6,4 @@ Refresh the page if below visualization images are not showing**
 
 
 ## Donut Chart
-![Pie Chart](https://drive.google.com/uc?export=view&id=1I95nXQbGzm9GytBHQGuqtShKMnI2oo0j)
+![Donut Chart](https://drive.google.com/uc?export=view&id=1I95nXQbGzm9GytBHQGuqtShKMnI2oo0j)
