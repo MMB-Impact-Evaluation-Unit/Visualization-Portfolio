@@ -1,2 +1,3 @@
-# Basic Map
-![MMB State Map](https://user-images.githubusercontent.com/57459306/197020628-1f31464c-556d-49fb-8a7a-37aef254ed67.png)
+# Basic MapRefresh the page if below visualization images are not showing**
+
+![MMB State Map](https://drive.google.com/uc?export=view&id=1_NrEsZWSsSOYWKIJcCSWzA0ejtirxu0B)
