@@ -1,5 +1,9 @@
-# Donut Chart (11.17.22)
-![Donut Chart (11 17 22)](https://user-images.githubusercontent.com/57459306/202512917-79afdb6f-2c8a-49a2-bcea-68356dd75051.png)
+# Pie Chart/Donut Chart
+Refresh the page if below visualization images are not showing**
 
-# Pie Chart (12.07.22)
-![Pie Chart](https://user-images.githubusercontent.com/57459306/206235624-be08d3fb-ebde-4d4c-a51d-93de64f88df9.png)
+## Pie Chart
+![Donut Chart (11 17 22)](https://drive.google.com/uc?export=view&id=1zJDa1as9jl0OlFFy_z-fgBF24Zha4NCr)
+
+
+## Donut Chart
+![Pie Chart](https://drive.google.com/uc?export=view&id=1I95nXQbGzm9GytBHQGuqtShKMnI2oo0j)
