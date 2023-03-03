@@ -1,10 +1,13 @@
-# 1. Simple Scatter Plot (10.11.22)
-![Simple Scatter Plot (10 11 22)](https://user-images.githubusercontent.com/57459306/195183938-13624826-b9d6-4594-92fd-48c121d2a1d4.png)
+# Scatterplot
+Refresh the page if below visualization images are not showing**
 
-# 2. Scatter Plot with a line (10.19.22)
-![Scatter Plot with a line (10 19 22)](https://user-images.githubusercontent.com/57459306/196707173-311ad689-b2c0-4ad1-9665-ff0909049707.png)
+## 1. Simple Scatter Plot (10.11.22)
+![Simple Scatter Plot (10 11 22)](https://drive.google.com/uc?export=view&id=1l6NP4LttQ3A5AB15PZQzoe_YX7aWEymc)
 
-# 3. Scatter Plot with a regression line (10.19.22)
-![Scatter Plot with a regresison line (10 19 22)](https://user-images.githubusercontent.com/57459306/196704724-5843f8ef-e27c-4958-ab0e-9ca0c4f24b56.png)
+## 2. Scatter Plot with a line (10.19.22)
+![Scatter Plot with a line (10 19 22)](https://drive.google.com/uc?export=view&id=14SinLkhQiMUZiOjZeXAtTlg-A2N6toJf)
+
+## 3. Scatter Plot with a regression line (10.19.22)
+![Scatter Plot with a regresison line (10 19 22)](https://drive.google.com/uc?export=view&id=1lFwywKJmfwYoQsr47kaibu1rwksptaSh)
 
 
