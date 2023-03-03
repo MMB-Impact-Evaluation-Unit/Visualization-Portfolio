@@ -1,2 +1,5 @@
-# Lollipop Chart1 (10.19.22)
-![Lollipop Chart1 (10 19 22)](https://user-images.githubusercontent.com/57459306/196723691-2d8ca9bf-97ee-453c-a314-6d391f970579.png)
+# Lollipop Chart (10.19.22)
+Refresh the page if below visualization images are not showing**
+
+![Lollipop Chart1 (10 19 22)](https://drive.google.com/uc?export=view&id=1oYgZ_sdROShIWVr68uCReh7ANrYassqO)
+
