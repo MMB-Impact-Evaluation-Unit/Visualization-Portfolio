@@ -1,4 +1,6 @@
 # Line Chart
+Refresh the page if below visualization images are not showing**
+
 ## 1. Simple Line Chart (10.03.22)
 ![Line Chart 1](https://drive.google.com/uc?export=view&id=12sHtslcSWQaQvlzn9S3uj5BPVsghsDdz)
 
