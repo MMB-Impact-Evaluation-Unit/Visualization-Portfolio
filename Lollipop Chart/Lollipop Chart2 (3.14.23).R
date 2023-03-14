@@ -9,18 +9,18 @@ mmb_load_fonts()
 
 data <- tribble(
   ~Step, ~Minimum, ~Maximum, ~Average,
-  "Step2\n(% cases assessed)", 13, 75, 49,
-  "Step3\n(% cases that did NOT\nrequire contact)", 13, 63, 29,
-  "Step4\n(% NCP interviews\ncompleted)", 22, 100, 48
+  "Step A", 24, 75, 49,
+  "Step B", 11, 63, 29,
+  "Step C", 8, 100, 50
 ) %>% 
-  mutate(Step = factor(Step, levels = c("Step4\n(% NCP interviews\ncompleted)", "Step3\n(% cases that did NOT\nrequire contact)", "Step2\n(% cases assessed)")))
+  mutate(Step = factor(Step, levels = c("Step C", "Step B", "Step A")))
 
 legend <- tribble( ##create a dummy data for data lable legend
   ~stat, ~points, ~Step,
-  "Minimum/Maximum     ", -10, "Step2\n(% cases assessed)",
-  "Average", -10, "Step2\n(% cases assessed)"
+  "Minimum/Maximum", -10, "Step B",
+  "Average", -10, "Step B"
 ) %>% 
-  mutate(stat = factor(stat, levels = c("Minimum/Maximum     ", "Average")))
+  mutate(stat = factor(stat, levels = c("Minimum/Maximum", "Average")))
 
 plot <- data %>% 
   ggplot(aes(y = Step, x = Average)) +
@@ -52,6 +52,7 @@ plot <- data %>%
   scale_color_manual(values = c("#003865", "#008EAA"))
 
 plot
+
 ggsave(
   width = 10,
   height = 10*9/16,
