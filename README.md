@@ -31,6 +31,7 @@
   - Line Chart By Group With Confidence Intervals
 ## [Lollipop Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Lollipop%20Chart)
   - Lollipop Chart1
+  - Lollipop Chart2
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
   - Basic Map (State Map Using MMB Colors)
 ## [Ridgeline Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Ridgeline%20Plot)
