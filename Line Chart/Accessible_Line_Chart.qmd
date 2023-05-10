@@ -1,0 +1,76 @@
+---
+title: "Accessible Line Chart"
+author: "Katie Kotasek"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# Set required packages
+library(tidyverse)
+library(mmbtools)
+library(readxl)
+
+mmbtools::mmb_load_fonts(quiet=TRUE)
+```
+
+```{r}
+# Set MMB report theme for plots
+report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            # kjk updated font color to black on 4/6/23 for accessibility
+            text = ggplot2::element_text(family = "Calibri", color = "black", size=9),
+            plot.title = ggplot2::element_text(size = 12, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 10),
+            legend.title = ggplot2::element_text(size = 10),
+            plot.caption = ggplot2::element_text(size=6),
+            # kjk added tick color on 4/11/23 for accessibility
+            axis.ticks = ggplot2::element_line(color="black"),
+            # kjk added color on 4/11/23 for accessibility
+            axis.title.x = ggplot2::element_text(size = 10,color = "black"), # crt update 10/12
+            # kjk added axis text color on 4/11/23 for accessibility
+            axis.title.y = ggplot2::element_text(size = 10, angle=90,color = "black"), # crt update 10/12
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            # kjk added legend text color on 4/11/23 for accessibility
+            legend.text = ggplot2::element_text(size=10, color = "black"),
+            # kjk added legend background color on 4/28/23 for accessibility
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(0.5, "line")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+# Read in sample data
+data <- read_xlsx("Accessible_line_data.xlsx")
+```
+
+```{r}
+data %>%
+    ggplot(aes(x=x,y=y,color=desc,shape=desc)) +
+    geom_line() +
+    geom_point(size=3.5) +
+    # Use accessible colors that work with the different color vision deficiencies
+    scale_color_manual(values=c("#4d7493","#96192E"),name="Legend") +
+    # Use shapes to help with accessibility
+    scale_shape(name  ="Legend") +
+    labs(title = "Accessible Line Chart",x="X Value", y="Y Value") +
+    report_theme(
+        axis.text.x = element_text(size=10,color="black")
+        ,axis.text.y = element_text(size=10,color="black")
+        ,legend.position = "bottom")
+```
+
+```{r}
+# Save plot to PNG file
+ggsave(
+    filename = "Test.png",
+    width=6.5, # Maximum plot width
+    height=6.5 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
