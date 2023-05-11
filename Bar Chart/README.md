@@ -20,3 +20,7 @@ Refresh the page if below visualization images are not showing**
 ## MMB Bar Chart
 ![MMB Bar Chart](https://drive.google.com/uc?export=view&id=1L_qUSdbPKyGWxu62_qCnNqgMdE-ZRbRa) 
 
+## Accessible Bar Chart
+![Accessible Bar Chart](https://drive.google.com/uc?export=view&id=15Vxp-xXS5fkOcG1Ji6asLjaxtjTMZkRH) 
+
+
