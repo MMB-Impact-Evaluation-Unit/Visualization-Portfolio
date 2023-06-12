@@ -1,0 +1,112 @@
+---
+title: "Accessible MMB Map"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(mmbtools)
+library(sf)
+library(readxl)
+library(ggpattern)
+
+mmbtools::mmb_load_fonts(quiet=TRUE)
+```
+
+<!-- REPORT THEME -->
+
+```{r}
+report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            # kjk updated color on 4/6/23 for accessibility
+            text = ggplot2::element_text(family = "Calibri",color = "#000000", size=9),
+            plot.title = ggplot2::element_text(size = 12, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 10),
+            legend.title = ggplot2::element_text(size = 9),
+            plot.caption = ggplot2::element_text(size=6),
+            # kjk added tick color on 4/11/23 for accessibility
+            axis.ticks = ggplot2::element_line(color="#000000"),
+            # kjk added color on 4/11/23 for accessibility
+            axis.title.x = ggplot2::element_text(size = 11,color = "#000000"), # crt update 10/12
+            # kjk added color on 4/11/23 for accessibility
+            axis.title.y = ggplot2::element_text(size = 10, angle=90,color = "#000000"), # crt update 10/12
+            plot.background = ggplot2::element_rect(fill = "#ffffff", color="#ffffff"),
+            # kjk added legend.text on 4/11/23 for accessibility
+            legend.text = ggplot2::element_text(size=10,color = "#000000"),
+            legend.key.size = unit(0.5, "line")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+#### get county map ####
+mn_geography_df <- mmbtools::mn_geometry_df %>%
+  mutate(NAME = gsub(" County, Minnesota", "", NAME),
+         NAME = str_to_upper(NAME))
+```
+
+```{r}
+# Read in data and calculate probability values
+data <- read_xlsx("Example Map Data.xlsx") %>%
+    mutate(state_prob = round((sum(yes_total) + (0.5*sum(unsure_total))) / sum(total), 2)) %>%
+    group_by(region) %>%
+    mutate(region_prob = round((sum(yes_total) + (0.5*sum(unsure_total))) / sum(total), 2)) %>%
+    ungroup() %>%
+    arrange(region)
+```
+
+```{r}
+# create map
+mn_geography_df %>%
+    left_join(data, by = c("NAME" = "Q6")) %>%
+    arrange(NAME) %>%
+    st_as_sf() %>%
+    ggplot(aes(fill = as.factor(region_prob))) +
+    # unfortunately, have to set pattern value for each county
+    geom_sf_pattern(color="black"
+        ,pattern = c(
+            "stripe","crosshatch","none","none","circle","none","none","none","stripe","crosshatch"
+            ,"none","none","circle","none","none","stripe","none","none","crosshatch","none"
+            ,"none","none","none","none","none","none","crosshatch","none","none","circle"
+            ,"stripe","none","circle","circle","none","stripe","none","stripe","none","none"
+            ,"none","none","none","none","none","circle","circle","circle","none","none"
+            ,"none","none","none","none","none","none","none","circle","none","none"
+            ,"none","crosshatch","none","none","circle","none","none","none","crosshatch","circle"
+            ,"none","stripe","circle","none","none","none","none","none","none","none"
+            ,"none","crosshatch","none","none","none","circle","none")
+        ,pattern_fill = "black"
+        ,pattern_angle = 45
+        # set thickness of pattern
+        ,pattern_density = 0.03
+        # set pattern spacing
+        ,pattern_spacing = 0.03) +
+    ggthemes::theme_map() +
+    scale_fill_viridis_d() +
+    # override legend so patterns match
+    guides(fill = guide_legend(override.aes = list(
+                                 pattern = c("none","none","none","circle","stripe","crosshatch"),
+                                 pattern_spacing = .02,
+                                 pattern_angle = c(0,0,0,45,45,45)))
+        ) +
+    labs(title = ""
+         ,fill = "Region Probability") +
+    report_theme(
+        legend.position = "bottom"
+        ,legend.key.height=unit(0.25,"in")
+        ,axis.text.y = element_blank()
+        ,axis.text.x = element_blank()
+        ,axis.ticks.y = element_blank()
+        ,axis.ticks.x = element_blank()
+        ,legend.background = element_rect(fill = "#ffffff",color="#ffffff")
+      )
+```
+
+```{r}
+# save as PNG
+ggsave("Accessible MMB Map.png", width = 6.5, height = 6.5, units = "in")
+```
+
