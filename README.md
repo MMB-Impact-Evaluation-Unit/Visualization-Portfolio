@@ -34,11 +34,13 @@
   - Lollipop Chart2
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
   - Basic Map (State Map Using MMB Colors)
+  - Accessible MMB Map
 ## [Ridgeline Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Ridgeline%20Plot)
    - Simple Ridgeline Plot  
 ## [Pie Chart & Donut Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Pie%20Chart%20%26%20Donut%20Chart)
   - Pie Chart
   - Donut Chart
+  - Accessible Pie Chart
 ## [Sankey Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Sankey%20Diagram)
   - Sankey Diagram
 ## [Scatter plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Scatter%20Plot)
