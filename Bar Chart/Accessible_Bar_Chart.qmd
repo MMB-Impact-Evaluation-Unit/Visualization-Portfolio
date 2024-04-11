@@ -22,23 +22,34 @@ report_theme <- function(...){
     mmbtools::theme_mmb_basic() %+replace%
         ggplot2::theme(
             # kjk updated font color to black on 4/6/23 for accessibility
-            text = ggplot2::element_text(family = "Calibri", color = "black", size=9),
-            plot.title = ggplot2::element_text(size = 12, face="bold",hjust = 0, vjust = 1.5),
-            plot.subtitle = ggplot2::element_text(size = 10),
-            legend.title = ggplot2::element_text(size = 9),
-            plot.caption = ggplot2::element_text(size=6),
+            # kjk updated general text size to be 12 pt on 4/4/24 for accessibility
+            text = ggplot2::element_text(family = "calibri", color = "black", size=12),
+            # kjk updated title text size to be 18 pt on 4/4/24 for accessibility
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            # kjk updated subtitle text size to be 16 pt on 4/4/24 for accessibility
+            plot.subtitle = ggplot2::element_text(size = 14),
+            # kjk updated legend title text size to be 12 pt on 4/4/24 for accessibility
+            legend.title = ggplot2::element_text(size = 12),
+            # kjk updated caption text size to be 11 pt on 4/4/24 for accessibility
+            plot.caption = ggplot2::element_text(size=11),
             # kjk added tick color on 4/11/23 for accessibility
             axis.ticks = ggplot2::element_line(color="black"),
             # kjk added color on 4/11/23 for accessibility
-            axis.title.x = ggplot2::element_text(size = 10,color = "black"), # crt update 10/12
+            axis.title.x = ggplot2::element_text(size = 12,color = "black"), # crt update 10/12
+            # kjk added default x-axis text size on 2/20/24
+            axis.text.x = ggplot2::element_text(size = 12,color = "black"),
+            # kjk added default y-axis text size on 2/20/24
+            axis.text.y = ggplot2::element_text(size = 12,color = "black"),
             # kjk added axis text color on 4/11/23 for accessibility
-            axis.title.y = ggplot2::element_text(size = 10, angle=90,color = "black"), # crt update 10/12
+            axis.title.y = ggplot2::element_text(size = 12, angle=90,color = "black"), # crt update 10/12
             plot.background = ggplot2::element_rect(fill = "white", color="white"),
             # kjk added legend text color on 4/11/23 for accessibility
-            legend.text = ggplot2::element_text(size=9, color = "black"),
+            # kjk updated legend text size to be 12 pt on 4/4/24 for accessibility
+            legend.text = ggplot2::element_text(size=12, color = "black"),
             # kjk added legend background color on 4/28/23 for accessibility
             legend.background = ggplot2::element_rect(fill = "white",color="white"),
-            legend.key.size = unit(0.5, "line")
+            legend.key.size = unit(1, "line"),
+            plot.caption.position = "plot"
         ) %+replace%
         theme(...)
 }
@@ -69,36 +80,31 @@ counts <- data %>%
 # Display bar chart
 counts %>%
     mutate(bucket = fct_reorder(bucket,-b_count)) %>%
-    ggplot(aes(x=bucket, y=b_count, fill=bucket)) +
+    ggplot(aes(x=bucket,y=b_count,fill=bucket, pattern=bucket)) +
     # manually set patterns for the colors that don't meet the minimum
     # color contrast ratio
-    geom_bar_pattern(stat="identity", color="black"
-                     ,pattern = c("none", # 1st col
-                                  "stripe", # 2nd col
-                                  "none", # 3rd col
-                                  "circle", # 4th col
-                                  "crosshatch" # 5th col
-                                 )
-                     ,pattern_fill = "black"
-                     ,pattern_angle = 45
-                     ,pattern_density = 0.05
-                     ,pattern_spacing = 0.05) +
+    geom_col_pattern(position = "dodge", width=0.9,
+                   color = "black", 
+                   pattern_fill = "black",
+                   pattern_angle = 45,
+                   pattern_density = 0.05,
+                   pattern_spacing = 0.05) +
     # The Viridis color palette seems to work the best for accessibility (distinguishing
     # between black and white and for other types of color deficiencies). However,
     # not all colors meet the minimum color contrast ratio of 3:1. That is why the
     # patterns are added.
     scale_fill_viridis_d("Legend") +
+    scale_pattern_manual("Legend",values = c("Category 1"="none","Category 2"="stripe","Category 3"="none"
+        ,"Category 4"="circle","Category 5"="crosshatch")) +
     # override the legend so the patterns show up as well
     guides(fill = guide_legend(override.aes = 
-                               list(
-                                 pattern = c("none","none","stripe","circle","crosshatch"),
-                                 pattern_spacing = .02,
+                               list(pattern = c("none","none","stripe","circle","crosshatch"),
+                                 pattern_spacing = 0.015,
                                  pattern_angle = c(0, 0, 45, 45, 45)))) +
     labs(x="", y="Count") +
     report_theme(legend.position = "bottom"
-        ,legend.key.size = unit(0.25,"in")
-        ,axis.text.x = element_text(size=10, color="black")
-        ,axis.text.y = element_text(size=10, color="black")
+        ,axis.text.x = element_text(size=12, color="black")
+        ,axis.text.y = element_text(size=12, color="black")
         )
 ```
 
