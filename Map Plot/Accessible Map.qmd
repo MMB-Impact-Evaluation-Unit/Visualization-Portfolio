@@ -18,25 +18,39 @@ mmbtools::mmb_load_fonts(quiet=TRUE)
 <!-- REPORT THEME -->
 
 ```{r}
+# Set MMB report theme for plots
 report_theme <- function(...){
     mmbtools::theme_mmb_basic() %+replace%
         ggplot2::theme(
-            # kjk updated color on 4/6/23 for accessibility
-            text = ggplot2::element_text(family = "Calibri",color = "#000000", size=9),
-            plot.title = ggplot2::element_text(size = 12, face="bold",hjust = 0, vjust = 1.5),
-            plot.subtitle = ggplot2::element_text(size = 10),
-            legend.title = ggplot2::element_text(size = 9),
-            plot.caption = ggplot2::element_text(size=6),
+            # kjk updated font color to black on 4/6/23 for accessibility
+            # kjk updated general text size to be 12 pt on 4/4/24 for accessibility
+            text = ggplot2::element_text(family = "calibri", color = "black", size=12),
+            # kjk updated title text size to be 18 pt on 4/4/24 for accessibility
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            # kjk updated subtitle text size to be 16 pt on 4/4/24 for accessibility
+            plot.subtitle = ggplot2::element_text(size = 14),
+            # kjk updated legend title text size to be 12 pt on 4/4/24 for accessibility
+            legend.title = ggplot2::element_text(size = 12),
+            # kjk updated caption text size to be 11 pt on 4/4/24 for accessibility
+            plot.caption = ggplot2::element_text(size=11),
             # kjk added tick color on 4/11/23 for accessibility
-            axis.ticks = ggplot2::element_line(color="#000000"),
+            axis.ticks = ggplot2::element_line(color="black"),
             # kjk added color on 4/11/23 for accessibility
-            axis.title.x = ggplot2::element_text(size = 11,color = "#000000"), # crt update 10/12
-            # kjk added color on 4/11/23 for accessibility
-            axis.title.y = ggplot2::element_text(size = 10, angle=90,color = "#000000"), # crt update 10/12
-            plot.background = ggplot2::element_rect(fill = "#ffffff", color="#ffffff"),
-            # kjk added legend.text on 4/11/23 for accessibility
-            legend.text = ggplot2::element_text(size=10,color = "#000000"),
-            legend.key.size = unit(0.5, "line")
+            axis.title.x = ggplot2::element_text(size = 12,color = "black"), # crt update 10/12
+            # kjk added default x-axis text size on 2/20/24
+            axis.text.x = ggplot2::element_text(size = 12,color = "black"),
+            # kjk added default y-axis text size on 2/20/24
+            axis.text.y = ggplot2::element_text(size = 12,color = "black"),
+            # kjk added axis text color on 4/11/23 for accessibility
+            axis.title.y = ggplot2::element_text(size = 12, angle=90,color = "black"), # crt update 10/12
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            # kjk added legend text color on 4/11/23 for accessibility
+            # kjk updated legend text size to be 12 pt on 4/4/24 for accessibility
+            legend.text = ggplot2::element_text(size=12, color = "black"),
+            # kjk added legend background color on 4/28/23 for accessibility
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(1, "line"),
+            plot.caption.position = "plot"
         ) %+replace%
         theme(...)
 }
@@ -65,35 +79,28 @@ mn_geography_df %>%
     left_join(data, by = c("NAME" = "Q6")) %>%
     arrange(NAME) %>%
     st_as_sf() %>%
-    ggplot(aes(fill = as.factor(region_prob))) +
-    # unfortunately, have to set pattern value for each county
-    geom_sf_pattern(color="black"
-        ,pattern = c(
-            "stripe","crosshatch","none","none","circle","none","none","none","stripe","crosshatch"
-            ,"none","none","circle","none","none","stripe","none","none","crosshatch","none"
-            ,"none","none","none","none","none","none","crosshatch","none","none","circle"
-            ,"stripe","none","circle","circle","none","stripe","none","stripe","none","none"
-            ,"none","none","none","none","none","circle","circle","circle","none","none"
-            ,"none","none","none","none","none","none","none","circle","none","none"
-            ,"none","crosshatch","none","none","circle","none","none","none","crosshatch","circle"
-            ,"none","stripe","circle","none","none","none","none","none","none","none"
-            ,"none","crosshatch","none","none","none","circle","none")
-        ,pattern_fill = "black"
-        ,pattern_angle = 45
-        # set thickness of pattern
-        ,pattern_density = 0.03
-        # set pattern spacing
-        ,pattern_spacing = 0.03) +
+    # define fill and pattern values
+    ggplot(aes(fill = as.factor(region_prob),pattern = as.factor(region_prob))) +
+    # set general pattern options
+    geom_sf_pattern(color = "black", 
+                   pattern_fill = "black",
+                   pattern_angle = 45,
+                   pattern_density = 0.025,
+                   pattern_spacing = 0.025,
+                   pattern_key_scale_factor = 0.6) +
     ggthemes::theme_map() +
-    scale_fill_viridis_d() +
+    # rename color legend title
+    scale_fill_viridis_d("Region Probability") +
+    # set pattern legend title to match so there is only one legend
+    # manually pattern to the matching values
+    scale_pattern_manual("Region Probability",values = c("0.21"="none","0.29"="none","0.41"="none"
+        ,"0.48"="circle","0.68"="stripe","0.85"="crosshatch")) +
     # override legend so patterns match
     guides(fill = guide_legend(override.aes = list(
                                  pattern = c("none","none","none","circle","stripe","crosshatch"),
                                  pattern_spacing = .02,
-                                 pattern_angle = c(0,0,0,45,45,45)))
-        ) +
-    labs(title = ""
-         ,fill = "Region Probability") +
+                                 pattern_density = .15,
+                                 pattern_angle = c(0,0,0,45,45,45)))) +
     report_theme(
         legend.position = "bottom"
         ,legend.key.height=unit(0.25,"in")
