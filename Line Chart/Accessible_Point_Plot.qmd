@@ -10,7 +10,6 @@ editor_options:
 library(tidyverse)
 library(mmbtools)
 library(readxl)
-library(colorspace)
 
 mmbtools::mmb_load_fonts(quiet=TRUE)
 ```
@@ -71,12 +70,5 @@ data %>%
         ,axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size=12)
         ,axis.title.y = element_text(margin = unit(c(0, 3, 0, 0), "mm"),angle=90,size=12)) +
     annotate("text",x=4.6,y=0.55,label="Selected date",angle=90)
-
-ggsave(
-    filename = "Accessible point plot.png",
-    width=6.5, # Maximum plot width
-    height=7 * 10/16, # Scale this however you want. Current is 16:10
-    units="in"
-)
 ```
 
