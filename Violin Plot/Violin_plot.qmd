@@ -1,0 +1,71 @@
+---
+title: "Violin Plot"
+author: "Katie Kotasek"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(mmbtools)
+library(readxl)
+
+mmb_load_fonts(quiet = TRUE)
+```
+
+```{r}
+report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            # kjk updated font color to black on 4/6/23 for accessibility
+            text = ggplot2::element_text(family = "calibri", color = "black", size=12),
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 14),
+            plot.caption = ggplot2::element_text(size=11),
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            plot.caption.position = "plot",
+            # kjk added tick color on 4/11/23 for accessibility
+            axis.ticks = ggplot2::element_line(color="black"),
+            # kjk added color on 4/11/23 for accessibility
+            axis.title.x = ggplot2::element_text(size = 12,color = "black"), # crt update 10/12
+            # kjk added default x-axis text size on 2/20/24
+            axis.text.x = ggplot2::element_text(size = 12,color = "black"),
+            # kjk added default y-axis text size on 2/20/24
+            axis.text.y = ggplot2::element_text(size = 12,color = "black"),
+            # kjk added axis text color on 4/11/23 for accessibility
+            axis.title.y = ggplot2::element_text(size = 12, angle=90,color = "black"), # crt update 10/12
+            legend.title = ggplot2::element_text(size = 12),
+            # kjk added legend text color on 4/11/23 for accessibility
+            legend.text = ggplot2::element_text(size=12, color = "black"),
+            # kjk added legend background color on 4/28/23 for accessibility
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(1, "line")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+# Average family student loan debt for aged 25-55, by race and year normalized to 2016 dollars
+student_debt <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-02-09/student_debt.csv')
+```
+
+```{r}
+student_debt <- student_debt %>%
+  mutate(loan_pct = round((loan_debt_pct * 100), 2)) %>%
+  select(year, race, loan_pct)
+```
+
+```{r}
+student_debt %>%
+  ggplot(aes(x = race, y = loan_pct, fill = race)) +
+    geom_violin() +
+    scale_fill_viridis_d() +
+    labs(title = "Distribution of student loan debt percentage by race",
+         subtitle = "Years 1989 - 2016",caption = "Source: https://apps.urban.org/features/wealth-inequality-charts",
+         x = "",y = "Loan Debt (%)") +
+    report_theme(legend.position = "none"
+        ,axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size=12)
+        ,axis.title.y = element_text(margin = unit(c(0, 3, 0, 0), "mm"),angle=90,size=12))
+```
