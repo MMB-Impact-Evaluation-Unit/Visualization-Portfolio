@@ -49,6 +49,9 @@
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
   - Basic Map (State Map Using MMB Colors)
   - Accessible MMB Map
+
+## [Radar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Radar%20Chart)
+   - Radar Chart
     
 ## [Ridgeline Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Ridgeline%20Plot)
    - Simple Ridgeline Plot
