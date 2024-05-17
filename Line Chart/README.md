@@ -15,3 +15,6 @@ Source: [LineChart.Rmd](https://github.com/mmbimpact/Visualization-Portfolio/blo
 
 ## 4. Accessible Line Chart
 ![Accessible Line Chart](https://drive.google.com/uc?export=view&id=1vksVr1k0zCA08cYwocorL4_iaVxRZmjB)
+
+## 5. Accessible Point Plot with Error Bars
+![Accessible Point Plot with Error Bars](https://drive.google.com/uc?export=view&id=1kTYoQxONjD-MVuzqCpc3yN3RwLcA6FpQ)
