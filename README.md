@@ -73,3 +73,6 @@
   - 2 ring Venn Diagram
   - 3 ring Venn Diagram
   - 4 ring Venn Diagram
+
+## [Violin Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Violin%20Plot)
+  - Violin Plot
