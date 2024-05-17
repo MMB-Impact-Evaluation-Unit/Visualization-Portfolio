@@ -41,6 +41,7 @@
   - Simple Line Chart
   - Simple Line Chart Grouped by Variable
   - Line Chart By Group With Confidence Intervals
+  - Accessible Line Chart
   - Accessible Point Plot with Error Bars
     
 ## [Lollipop Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Lollipop%20Chart)
