@@ -2,6 +2,10 @@
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
   - Static Bubble Plot
   - Animated Bubble Plot
+
+## [Beeswarm Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Beeswarm%20Plot)
+  - Beeswarm Plot
+    
 ## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bar%20Chart)
    - Simple Bar Chart
    - Simple Bar Chart with Facet
