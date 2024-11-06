@@ -17,8 +17,6 @@ mmb_load_fonts()
 # 3 - 238A8D (teal) - 2_branch
 # 4 - 54C667 (green-ish) - 3_branch
 # 5 - FDE725 (yellow) - 4_branch
-# 6 - DBA3AB (pink) - 3_branch
-# 7 - 453781 (purple) - 4_branch
 my_colors <- 'd3.scaleOrdinal() .domain(["1","2","3"]) .range(["#97999B","#39568C",
 "#238A8D","#54C667","#FDE725","#DBA3AB","#453781"])'
 
