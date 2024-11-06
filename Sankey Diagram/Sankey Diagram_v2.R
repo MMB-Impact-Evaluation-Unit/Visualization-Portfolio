@@ -50,6 +50,7 @@ nodes <- nodes %>%
     mutate(group="1")
 
 ## CREATE DIAGRAM
+# Saving the networkD3 object to a variable so it can be manipulated in the code below
 s2 <- sankeyNetwork(Links = links, Nodes = nodes,
               Source = "IDsource", Target = "IDtarget",
               Value = "value", NodeID = "name",iterations = 0,
@@ -58,6 +59,7 @@ s2 <- sankeyNetwork(Links = links, Nodes = nodes,
               nodePadding = 25,sinksRight=FALSE,LinkGroup = "group",NodeGroup="group")
 
 ## DISPLAY DIAGRAM
+# Use the htmlwidgets package to manipulate the networkD3 object
 htmlwidgets::onRender(s2,
 'function(el,x) {
     //set variables
