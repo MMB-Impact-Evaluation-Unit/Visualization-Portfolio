@@ -78,3 +78,7 @@
 
 ## [Violin Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Violin%20Plot)
   - Violin Plot
+
+## [Waffle Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Waffle%20Plot)
+  - Waffle Plot
+  - Accessible Waffle Plot
