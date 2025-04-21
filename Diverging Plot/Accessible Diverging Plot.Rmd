@@ -1,0 +1,176 @@
+---
+title: "Accessible Diverging Plot"
+author: "Katie Kotasek"
+date: "2025-04-18"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r packages}
+# default packages
+library(readxl)
+library(mmbtools)
+library(tidyverse)
+library(here)
+library(readxl)
+
+# accessibility package(s)
+library(ggpattern)
+library(colorBlindness)
+
+mmb_load_fonts()
+```
+
+```{r}
+## LOAD STANDARD ACCESSIBLE REPORT THEME FUNCTION ##
+mmb_report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            text = ggplot2::element_text(family = "Calibri", color = "black", size=11),
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 14),
+            legend.title = ggplot2::element_text(size = 11),
+            plot.caption = ggplot2::element_text(size=9),
+            axis.ticks = ggplot2::element_line(color="black"),
+            axis.text.x = ggplot2::element_text(size = 11,color = "black"),
+            axis.text.y = ggplot2::element_text(size = 11,color = "black"),
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            panel.background = ggplot2::element_rect(fill="white",color="white"),
+            legend.text = ggplot2::element_text(size=11, color = "black"),
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(1, "line"),
+            plot.caption.position = "plot",
+            axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size=11,color = "black"),
+            axis.title.y = element_text(margin = unit(c(0, 3, 0, 0), "mm"),size=11,angle=90,color = "black")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+# The process outlined below uses ggplot2 to create a diverging plot. This is a more in-depth process than using R packages like likert or HH which are more straightforward.
+# The upside of using ggplot2 is that other R packages like ggpattern can be used to make the overall plot more accessible by using patterns instead of relying
+# on color alone.
+```
+
+```{r}
+# read example data
+data <- read_excel(here("Code","R","Data Viz GitHub","Diverging plot","Diverging data.xlsx"))
+
+# convert to long format
+data_long <- data %>%
+    pivot_longer(
+        cols = `Strongly disagree`:`Strongly agree`
+        ,values_to = "value"
+        ,names_to = "desc"
+    )
+
+# calculate values
+calc_values <- data_long %>%
+    mutate(
+        middle_shift = sum(value[1:2])
+        ,lagged_value = lag(value, default = 0)
+        ,left = cumsum(lagged_value) - middle_shift
+        ,right = cumsum(value) - middle_shift
+        ,middle_point = (left + right) / 2
+        ,width = right - left
+        ,.by = Question
+    )
+# test plot
+calc_values %>%
+    ggplot() +
+    geom_tile(aes(x=middle_point,y=Question,width=width,fill=desc),height=0.75)
+
+# sort bars by desc
+data_factor <- calc_values %>%
+    mutate(
+        Question = factor(Question,levels = data$Question) %>% fct_rev()
+    )
+
+# test plot after sorting
+data_factor %>%
+    ggplot() +
+    geom_tile(aes(x=middle_point,y=Question,width=width,fill=desc),height=bar_width)
+
+# convert question to factor
+factor_sort <- data_factor %>%
+  mutate(
+    Question = factor(Question,levels = unique(data$Question))
+  )
+```
+
+```{r}
+# set manual color palette
+colors <- c(
+    `Strongly agree` = "#003865"
+    ,Agree =  "#6688a3"
+    ,Neutral = "#D9D9D6"
+    ,Disagree = "#ed9c4d"
+    ,`Strongly disagree` = "#E57200"
+)
+# set labels to use instead of a legend
+labels = c(
+    "Strongly disagree" = "Strongly\ndisagree"
+    ,"Disagree" = "Disagree"
+    ,"Neutral" = "Neutral"
+    ,"Agree" = "Agree"
+    ,"Strongly agree" = "Strongly\nagree"
+)
+```
+
+```{r}
+# create plot
+factor_sort %>%
+    ggplot(aes(x=middle_point,y=Question,width=width,fill=desc)) +
+    geom_tile_pattern(aes(pattern=desc),height=0.75
+        ,color="black"    # adds black border around bars
+        ,pattern_color = "black"   # sets color of the pattern
+        ,pattern_angle = 45
+        ,pattern_density = 0.01   # sets thickness of the pattern
+        ,pattern_spacing = 0.04
+    ) +
+    # remove legend text and manually reorder
+    scale_fill_manual("",values = colors
+        ,breaks=c("Strongly disagree","Disagree","Neutral","Agree","Strongly agree")
+    ) +
+    # remove legend text and set pattern(s)
+    scale_pattern_manual("",values = c("Strongly disagree"="none","Disagree"="none"
+        ,"Neutral"="none","Agree"="circle","Strongly agree"="none")
+    ) +
+    # add value label for strongly disagree,disagree,neutral,agree bars
+    geom_text(
+        data = factor_sort %>% filter(desc %in% c("Strongly disagree","Disagree","Neutral","Agree"))
+        ,aes(x = middle_point,y = Question,label = value)
+        ,size = 3,fontface = "bold"
+    ) +
+    # add value label for strongly agree bar
+    geom_text(
+        data = factor_sort %>% filter(desc=="Strongly agree")
+        ,aes(x = middle_point,y = Question,label = value)
+        ,size = 3,color="white",fontface = "bold"
+    ) +
+    # add label for desc at the top of the plot (instead of using a legend)
+    geom_text(data = factor_sort %>% filter(Question == "Q5")
+        ,aes(x = middle_point,y = Question,label = labels[desc]),color = "black"
+        ,nudge_y = 0.65,size = 3,fontface = "bold",vjust = 1,lineheight = 0.8
+    ) +
+    mmb_report_theme(
+        legend.position="none"
+        ,panel.grid = element_blank()
+        ,axis.title.y = element_blank()
+        ,axis.title.x = element_blank()
+        ,axis.text.x = element_blank()
+        ,axis.ticks.x = element_blank()
+    )
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Accessible Diverging Plot.png",
+    width=7, # Maximum plot width should be 6.5 or 7
+    height=8 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
