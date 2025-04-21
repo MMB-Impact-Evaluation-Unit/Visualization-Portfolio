@@ -1,0 +1,142 @@
+---
+title: "Accessible Animated Plot"
+author: "Katie Kotasek"
+date: "2025-04-11"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+library(colorBlindness)
+library(gganimate)  # animation package
+
+mmb_load_fonts()
+
+options(scipen=999)  # prevents scientific notation displaying
+```
+
+```{r}
+## LOAD STANDARD ACCESSIBLE REPORT THEME FUNCTION ##
+report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            text = ggplot2::element_text(family = "Calibri", color = "black", size=11),
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 14),
+            legend.title = ggplot2::element_text(size = 11),
+            plot.caption = ggplot2::element_text(size=9),
+            axis.ticks = ggplot2::element_line(color="black"),
+            axis.text.x = ggplot2::element_text(size = 11,color = "black"),
+            axis.text.y = ggplot2::element_text(size = 11,color = "black"),
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            panel.background = ggplot2::element_rect(fill="white",color="white"),
+            legend.text = ggplot2::element_text(size=11, color = "black"),
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(1, "line"),
+            plot.caption.position = "plot",
+            axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size=11,color = "black"),
+            axis.title.y = element_text(margin = unit(c(0, 3, 0, 0), "mm"),size=11,angle=90,color = "black")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+## READ TIDY TUESDAY DATA ##
+earn <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-02-23/earn.csv')
+
+## FILTER DATA ##
+earnFiltered <- earn %>%
+  filter(age %in% c("16 to 19 years", "20 to 24 years", "25 to 34 years",
+                    "35 to 44 years", "45 to 54 years", "55 to 64 years",
+                    "65 years and over") &
+         sex == "Both Sexes")
+```
+
+```{r}
+## CREATE STATIC VERSION ##
+earnFiltered %>%
+    filter(quarter == 1) %>%
+    # filtered out only to avoid overlapping text when animated
+    filter(age != "45 to 54 years") %>%
+    ggplot(aes(x=n_persons,y=median_weekly_earn,color=age,shape=age)) +
+    geom_point(size=2.5) +
+    geom_label(aes(label=age,fontface="bold"),nudge_y=100,nudge_x=100,size=2.5) +
+    # formatted y-axis labels
+    scale_y_continuous(limits = c(0, 1250),labels=scales::dollar) +
+    # shortened display text on x-axis to save space
+    scale_x_continuous(labels=c("0","10,000","20,000","30,000")) +
+    # specified colors manually to meet minimum contrast ratio (3:1); however, they are not distinctive
+    # when viewing different color vision deficiencies
+    scale_color_manual("Legend", values = c("#003865", "#8D3F2B",
+                                            "#5D295F", "#008EAA", "#0D5257",
+                                            "#A6192E")) +
+    # therefore, each category/group has a distinctive shape
+    scale_shape_manual(values=c(15,16,17,18,8,11,12)) +
+    labs(caption = "Source: https://www.bls.gov/cps/tables.htm#charemp_m",
+       x = "Number of persons (in thousands)",
+       y = "Median weekly earnings") +
+    report_theme(
+        legend.position = "none"
+    ) 
+```
+
+```{r}
+## SAVE TO PNG ##
+ggsave(
+    filename = "Accessible static version.png",
+    width=7, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
+```{r}
+## CREATE ANIMATED PLOT ##
+anim_earn <- earnFiltered %>%
+    filter(quarter == 1) %>%
+    # filtered out only to avoid overlapping text when animated
+    filter(age != "45 to 54 years") %>%
+    ggplot(aes(x=n_persons,y=median_weekly_earn,color=age,shape=age)) +
+    geom_point(size=3) +
+    geom_label(aes(label=age,fontface="bold"),nudge_y=100,nudge_x=100,size=2.5) +
+    # formatted y-axis labels
+    scale_y_continuous(limits = c(0, 1250),labels=scales::dollar) +
+    # shortened display text on x-axis to save space
+    scale_x_continuous(labels=c("0","10,000","20,000","30,000")) +
+    # specified colors manually to meet minimum contrast ratio (3:1); however, they are not distinctive
+    # when viewing different color vision deficiencies
+    scale_color_manual("Legend", values = c("#003865", "#8D3F2B",
+                                            "#5D295F", "#008EAA", "#0D5257",
+                                            "#A6192E")) +
+    # therefore, each category/group has a distinctive shape
+    scale_shape_manual(values=c(15,16,17,18,8,11,12)) +
+    labs(caption = "Source: https://www.bls.gov/cps/tables.htm#charemp_m",
+       x = "Number of persons (in thousands)",
+       y = "Median weekly earnings") +
+    report_theme(
+        legend.position = "none"
+    ) +
+    # define what state will transition
+    transition_states(states = year)
+```
+
+```{r}
+## ANIMATE BUBBLE PLOT ##
+animate(
+    anim_earn
+    ,nframes = 25 # this controls transition speed (higher numbers slow down the speed)
+    ,width = 7 # Maximum plot width should be 6.5 or 7
+    ,height = 7 * 10/16 # Scale this however you want. Current is 16:10
+    ,units = "in"
+    ,res = 300
+    )
+
+## SAVE ANIMATION AS GIF ##
+anim_save("Accessible animated plot.gif")
+```
+
