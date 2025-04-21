@@ -1,0 +1,94 @@
+---
+title: "Accessible Bar Chart"
+author: "Katie Kotasek"
+date: "2025-03-31"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# Set required packages
+library(tidyverse)
+library(mmbtools)
+library(readxl)
+library(ggpattern)   # add patterns
+library(colorBlindness)  # emulate different color deficiencies
+
+mmb_load_fonts()
+```
+
+```{r}
+## LOAD STANDARD ACCESSIBLE REPORT THEME FUNCTION ##
+report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            text = ggplot2::element_text(family = "Calibri", color = "black", size=11),
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 14),
+            legend.title = ggplot2::element_text(size = 11),
+            plot.caption = ggplot2::element_text(size=10),
+            axis.ticks = ggplot2::element_line(color="black"),
+            axis.text.x = ggplot2::element_text(size = 11,color = "black"),
+            axis.text.y = ggplot2::element_text(size = 11,color = "black"),
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            panel.background = ggplot2::element_rect(fill="white",color="white"),
+            legend.text = ggplot2::element_text(size=11, color = "black"),
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(1, "line"),
+            plot.caption.position = "plot",
+            axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size=11,color = "black"),
+            axis.title.y = element_text(margin = unit(c(0, 3, 0, 0), "mm"),size=11,angle=90,color = "black")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+data(HairEyeColor)
+
+HairEyeColor2 <- HairEyeColor %>%
+    group_by(Hair) %>%
+    reframe(count = sum(n))
+```
+
+```{r}
+# Display bar chart
+HairEyeColor2 %>%
+    # order category/groups by count
+    mutate(Hair = fct_reorder(Hair,-count)) %>%
+    ggplot(aes(x=Hair,y=count,fill=Hair,pattern=Hair)) +
+    # manually set patterns for the colors that don't meet the minimum contrast
+    # ratio or look too similar while viewing different color vision deficiencies
+    geom_col_pattern(
+        position = "dodge"
+        ,width=0.9
+        ,color="black"    # adds black border around bars
+        ,pattern_color = "white"   # sets color of the pattern
+        ,pattern_angle = 45
+        ,pattern_density = 0.05   # sets thickness of the pattern
+        ,pattern_spacing = 0.04) +  # sets how close (or apart) the pattern is 
+    scale_fill_manual(
+        values=c("#003865","#78BE21","#008EAA","#8D3F2B")
+    ) +
+    # set which category/groups have patterns
+    scale_pattern_manual(
+        "Legend"
+        ,values = c("Brown"="none","Blond"="none","Black"="none","Red"="stripe")
+    ) +
+    labs(x="Hair color", y="Count of individuals") +
+    report_theme(
+        legend.position = "none"
+    )
+```
+
+```{r}
+# Save plot to PNG file
+ggsave(
+    filename = "MMB accessible bar chart.png",
+    width=6.5, # Maximum plot width
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
