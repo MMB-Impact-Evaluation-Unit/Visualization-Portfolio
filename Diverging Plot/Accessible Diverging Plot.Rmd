@@ -91,7 +91,7 @@ data_factor <- calc_values %>%
 # test plot after sorting
 data_factor %>%
     ggplot() +
-    geom_tile(aes(x=middle_point,y=Question,width=width,fill=desc),height=bar_width)
+    geom_tile(aes(x=middle_point,y=Question,width=width,fill=desc),height=0.75)
 
 # convert question to factor
 factor_sort <- data_factor %>%
@@ -130,6 +130,8 @@ factor_sort %>%
         ,pattern_density = 0.01   # sets thickness of the pattern
         ,pattern_spacing = 0.04
     ) +
+    geom_vline(xintercept = 0,color = "black",linewidth = 0.25) +
+    scale_x_continuous(labels = abs,n.breaks=12) +
     # remove legend text and manually reorder
     scale_fill_manual("",values = colors
         ,breaks=c("Strongly disagree","Disagree","Neutral","Agree","Strongly agree")
@@ -155,13 +157,10 @@ factor_sort %>%
         ,aes(x = middle_point,y = Question,label = labels[desc]),color = "black"
         ,nudge_y = 0.65,size = 3,fontface = "bold",vjust = 1,lineheight = 0.8
     ) +
+    labs(x="Count of responses",y="Question") +
     mmb_report_theme(
         legend.position="none"
         ,panel.grid = element_blank()
-        ,axis.title.y = element_blank()
-        ,axis.title.x = element_blank()
-        ,axis.text.x = element_blank()
-        ,axis.ticks.x = element_blank()
     )
 ```
 
