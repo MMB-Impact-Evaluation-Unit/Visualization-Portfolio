@@ -19,6 +19,7 @@
    - MMB Bar Chart (multiple plots in one plot)
    - 
 ## [Boxplot Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Boxplot%20Chart)
+  - Accessible Boxplot Chart
   - Boxplot Chart
   - Boxplot Chart with Jitter
     
