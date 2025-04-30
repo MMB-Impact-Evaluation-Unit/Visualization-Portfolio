@@ -6,6 +6,7 @@
   - Animated Bubble Plot
 
 ## [Beeswarm Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Beeswarm%20Plot)
+  - Accessible Beeswarm Plot
   - Beeswarm Plot
     
 ## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bar%20Chart)
