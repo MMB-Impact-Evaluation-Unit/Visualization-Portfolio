@@ -36,6 +36,7 @@
   - Simple Correlation Plot (MMB Themes)
     
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
+  - Accessible Diverging Plot
   - Diverging Plot (likert package)
   - Diverging Plot (HH package)
     
