@@ -9,11 +9,14 @@
   - Beeswarm Plot
     
 ## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bar%20Chart)
+   - Accessible Bar Chart
+   - Accessible Bar Chart2
    - Simple Bar Chart
    - Simple Bar Chart with Facet
    - Simple Bar Chart (Horizontal)
    - Stacked Bar Chart
    - MMB Bar Chart (multiple plots in one plot)
+   - 
 ## [Boxplot Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Boxplot%20Chart)
   - Boxplot Chart
   - Boxplot Chart with Jitter
