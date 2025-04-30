@@ -28,6 +28,7 @@
   - Bump Plot
     
 ## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
+  - Accessible Corrlation Plot
   - Simple Correlation Plot (Square)
   - Simple Correlation Plot (Circle)
   - Simple Correlation Plot (Upper Triangle)
