@@ -24,6 +24,7 @@
   - Boxplot Chart with Jitter
     
 ## [Bump Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bump%20Plot)
+  - Accessible Bump Plot
   - Bump Plot
     
 ## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
