@@ -2,6 +2,7 @@
 
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
   - Accessible Animated Plot
+  - Accessible Animated Plot (static)
   - Static Bubble Plot
   - Animated Bubble Plot
 
