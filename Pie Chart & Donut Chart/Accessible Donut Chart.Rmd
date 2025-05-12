@@ -1,0 +1,106 @@
+---
+title: "Accessible Donut Chart"
+author: "Katie Kotasek"
+date: "2025-05-09"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r packages}
+library(readxl)
+library(mmbtools)
+library(tidyverse)
+
+# accessibility packages
+library(colorBlindness)
+library(ggpattern)
+
+mmb_load_fonts()
+```
+
+```{r}
+## LOAD STANDARD ACCESSIBLE REPORT THEME FUNCTION ##
+mmb_report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            text = ggplot2::element_text(family = "Calibri", color = "black", size=11),
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 14),
+            plot.caption = ggplot2::element_text(margin = unit(c(2, 0, 0, 0),"mm"),size=10,color = "black",face="italic"),
+            legend.title = ggplot2::element_text(size = 11),
+            legend.text = ggplot2::element_text(size=11, color = "black"),
+            axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size=11,color = "black"),
+            axis.text.x = ggplot2::element_text(size = 11,color = "black"),
+            axis.title.y = element_text(margin = unit(c(0, 3, 0, 0), "mm"),size=11,angle=90,color = "black"),
+            axis.text.y = ggplot2::element_text(size = 11,color = "black"),
+            axis.ticks = ggplot2::element_line(color="black"),
+            panel.background = ggplot2::element_rect(fill="white",color="white"),
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            plot.caption.position = "plot",
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(1, "line")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+data <- data.frame(
+  category = c("A", "B", "C", "D"),
+  count = c(10, 20, 30, 40)
+)
+
+# Calculate percentages and cumulative positions
+data <- data %>%
+  mutate(
+    fraction = count / sum(count),
+    ymax = cumsum(fraction),
+    ymin = c(0, head(ymax, n = -1)),
+    label_position = (ymax + ymin) / 2,
+    label = paste0(category, ": ", count)
+  )
+```
+
+```{r}
+# Create donut plot
+data %>%
+    ggplot(aes(ymin = ymin, ymax = ymax,xmin = 3, xmax = 4,fill=category,pattern=category)) +
+    geom_rect_pattern(
+        stat="identity",color = "black",pattern_color = "white"
+        ,pattern_angle = 45,pattern_density = 0.03
+        ,pattern_spacing = 0.04
+    ) +
+    coord_polar(theta = "y") +
+    xlim(0, 6) +  # Creates the "hole" in the center for donut
+    scale_fill_mncol(palette="main") +
+    scale_pattern_manual(values = c("A"="none","B"="none","C"="none","D"="stripe")) +
+    ggrepel::geom_text_repel(
+        aes(x = 3,y = label_position,label = label)
+        ,nudge_x = 1.7  # Nudge labels outward
+        ,color="black"
+        ,segment.color = "transparent"
+        ,direction = "y"
+        ,box.padding = 0.3
+    ) +
+    mmb_report_theme(
+        axis.text.y = element_blank()
+        ,axis.text.x = element_blank()
+        ,axis.ticks.x = element_blank()
+        ,axis.ticks.y = element_blank()
+        ,axis.title.x = element_blank()
+        ,axis.title.y = element_blank()
+        ,panel.border = element_blank()
+        ,legend.position = "none"
+    )
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Accessible Donut Chart.png",
+    width=6.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
