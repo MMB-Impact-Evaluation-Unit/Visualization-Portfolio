@@ -1,0 +1,80 @@
+---
+title: "Accessible Histogram Plots"
+author: "Katie Kotasek"
+date: "2025-04-21"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r packages}
+library(mmbtools)
+library(tidyverse)
+library(ggridges)
+
+# accessibility packages
+library(colorBlindness)
+
+mmb_load_fonts()
+```
+
+```{r}
+## LOAD STANDARD ACCESSIBLE REPORT THEME FUNCTION ##
+mmb_report_theme <- function(...){
+    mmbtools::theme_mmb_basic() %+replace%
+        ggplot2::theme(
+            text = ggplot2::element_text(family = "Calibri", color = "black", size=11),
+            plot.title = ggplot2::element_text(size = 16, face="bold",hjust = 0, vjust = 1.5),
+            plot.subtitle = ggplot2::element_text(size = 14),
+            plot.caption = ggplot2::element_text(margin = unit(c(2, 0, 0, 0),"mm"),size=10,color = "black",face="italic"),
+            legend.title = ggplot2::element_text(size = 11),
+            legend.text = ggplot2::element_text(size=11, color = "black"),
+            axis.title.x = element_text(margin = unit(c(3, 0, 0, 0), "mm"),size=11,color = "black"),
+            axis.title.y = element_text(margin = unit(c(0, 3, 0, 0), "mm"),size=11,angle=90,color = "black"),
+            axis.text.x = ggplot2::element_text(size = 11,color = "black"),
+            axis.text.y = ggplot2::element_text(size = 11,color = "black"),
+            axis.ticks = ggplot2::element_line(color="black"),
+            panel.background = ggplot2::element_rect(fill="white",color="white"),
+            plot.background = ggplot2::element_rect(fill = "white", color="white"),
+            plot.caption.position = "plot",
+            legend.background = ggplot2::element_rect(fill = "white",color="white"),
+            legend.key.size = unit(1, "line")
+        ) %+replace%
+        theme(...)
+}
+```
+
+```{r}
+# create data
+set.seed(123)
+data <- data.frame(
+    value = c(rnorm(300, mean = 55), rnorm(300, mean = 65), rnorm(300, mean = 75))
+    ,group = rep(c("Group A", "Group B", "Group C"), each = 300)
+)
+
+```
+
+```{r}
+data %>%
+    ggplot(aes(x = value, y = group,fill=group)) +
+    geom_density_ridges(stat = "binline", bins = 50, scale = 1,color="black") +
+    # ggpattern doesn't support ridgeline plots
+    # therefore, need to select colors manually
+    scale_fill_manual(values=c("#003865","#78BE21","#008EAA")) +
+    scale_x_continuous(n.breaks=12) +
+    scale_y_discrete(expand = c(0, 0)) +
+    labs(x = "Value",y = "") +
+    mmb_report_theme(
+        legend.position="none"
+    )
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Accessible Ridgeline Plot.png",
+    width=6.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
