@@ -9,11 +9,7 @@ Refresh the page if below visualization images are not showing**
 ![Donut Chart](https://drive.google.com/uc?export=view&id=1I95nXQbGzm9GytBHQGuqtShKMnI2oo0j)
 
 
-## Accessible Pie Chart1
-![Accessible Pie Chart1](https://drive.google.com/uc?export=view&id=1Vf1R6yPj9iRIUEdKBjUB9zKGrTT7EFkl)
-
-
-## Accessible Pie Chart2
+## Accessible Pie Chart
 ![Accessible Pie Chart1](https://drive.google.com/uc?export=view&id=1cpDcQARlqk-pLoT2XL9HWSjgc0o5HNbQ)
 
 
