@@ -50,6 +50,7 @@
     
 ## [Interactive Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Interactive%20Plot)
   - Interactive Plot
+  - Accessible Interactive Plot (static)
     
 ## [Line Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Line%20Chart)
   - Simple Line Chart
