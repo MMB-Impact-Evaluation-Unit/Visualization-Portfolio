@@ -44,6 +44,7 @@
 ## [Histogram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Histogram)
   - Simple Histogram
   - Simple Histogram (By group)
+  - Ridgeline Histogram Plot
   - Accessible Histogram
   - Accessible Histogram (By group)
     
