@@ -11,3 +11,7 @@ Refresh the page if below visualization images are not showing**
 
 ## Accessible Pie Chart
 ![Accessible Pie Chart](https://drive.google.com/uc?export=view&id=1Vf1R6yPj9iRIUEdKBjUB9zKGrTT7EFkl)
+
+
+## Accessible Donut Chart
+![Accessible Donut Chart](https://drive.google.com/uc?export=view&id=16yK9yKjht3Ax7XJPi7K-gx-T5KRJJHWU)
