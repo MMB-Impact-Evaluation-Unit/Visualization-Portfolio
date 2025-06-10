@@ -18,7 +18,7 @@
    - Simple Bar Chart (Horizontal)
    - Stacked Bar Chart
    - MMB Bar Chart (multiple plots in one plot)
-   - 
+     
 ## [Boxplot Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Boxplot%20Chart)
   - Accessible Boxplot Chart
   - Boxplot Chart
@@ -43,7 +43,9 @@
     
 ## [Histogram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Histogram)
   - Simple Histogram
-  - Simple Histogram(By group)
+  - Simple Histogram (By group)
+  - Accessible Histogram
+  - Accessible Histogram (By group)
     
 ## [Interactive Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Interactive%20Plot)
   - Interactive Plot
