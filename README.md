@@ -73,6 +73,7 @@
   - Pie Chart
   - Donut Chart
   - Accessible Pie Chart
+  - Accessible Donut Chart
     
 ## [Sankey Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Sankey%20Diagram)
   - Sankey Diagram
