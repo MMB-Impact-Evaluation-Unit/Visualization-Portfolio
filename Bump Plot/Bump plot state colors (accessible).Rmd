@@ -1,0 +1,77 @@
+---
+title: "Bump plot state colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-02-02"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+
+# plot specific package
+library(ggbump)
+
+# accessibility package(s)
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+```{r data}
+flights <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-07-12/flights.csv") %>%
+  janitor::clean_names()
+
+flights_by_year <- flights %>%
+    select(year, state = state_name, flights = flt_tot_1) %>%
+    summarise(
+        flights = sum(flights),.by=c(year,state)
+    )
+
+rank_by_year <- flights_by_year %>%
+    mutate(
+        rank = row_number(desc(flights)), .by = year
+    )
+
+todays_top <- rank_by_year %>%
+  filter(year == 2022, rank <= 6) %>%
+  pull(state)
+
+selected_countries <- rank_by_year %>%
+  filter(state %in% todays_top) 
+```
+
+```{r plot}
+selected_countries %>%
+    ggplot(aes(x=year,y=rank,color=state,shape=state,fill=state)) +
+    geom_bump() +
+    geom_point(size=2.5,color="black") +
+    geom_text(data = selected_countries %>% filter(year == 2016)
+              ,aes(label = state),hjust = 0.25,vjust=2,nudge_x = -0.1,size = 2.5
+              ,fontface = "bold",color="black") +
+    geom_text(data = selected_countries %>% filter(year == 2022)
+              ,aes(label = state),hjust = 1,vjust=2,nudge_x = 0.1,size = 2.5
+              ,fontface = "bold",color="black") +
+    scale_x_continuous(n.breaks=7) +
+    scale_y_continuous(n.breaks=6) +
+    scale_shape_manual(values=c(21,22,23,24,25,21)) +
+    scale_fill_mncol() +
+    scale_color_mncol() +
+    labs(x="Year",y="Rank") +
+    theme_mmb_accessible(
+        legend.position="none"
+    )
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Bump plot state colors (accessible).png",
+    width=6.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
