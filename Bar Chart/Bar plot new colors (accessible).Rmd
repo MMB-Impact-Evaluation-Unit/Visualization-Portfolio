@@ -1,0 +1,52 @@
+---
+title: "Bar plot new colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-02-02"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+
+# accessibility package(s)
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+```{r data}
+category <- c("A","B","C","D","E","F")
+
+n <- sample(1:100, length(category), replace = TRUE)
+
+data <- data.frame(category,n)
+```
+
+```{r plot}
+# Display bar chart
+data %>%
+    # order category/groups by count
+    mutate(category = fct_reorder(category,-n)) %>%
+    ggplot(aes(x=category,y=n,fill=category)) +
+    geom_col(color="black") +
+    scale_fill_manual(values=c(
+        "A"="#003865","B"="#78BE21","C"="#008EAA","D"="#A4BCC2","E"="#404788","F"="#FDEC51")) +
+    labs(x="Category", y="Count") +
+    theme_mmb_accessible(
+        legend.position = "none"
+    )
+```
+
+```{r}
+# Save plot to PNG file
+ggsave(
+    filename = "Bar plot new colors (accessible).png",
+    width=6.5, # Maximum plot width
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
