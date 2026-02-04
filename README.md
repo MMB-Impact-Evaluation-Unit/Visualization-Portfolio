@@ -2,31 +2,23 @@
 
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
   - Accessible Animated Plot
-  - Accessible Animated Plot (static)
-  - Static Bubble Plot
-  - Animated Bubble Plot
+  - Accessible Animated Plot (State Colors)
 
 ## [Beeswarm Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Beeswarm%20Plot)
   - Accessible Beeswarm Plot
-  - Beeswarm Plot
+  - Accessible Beeswarm Plot (State Colors)
     
 ## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bar%20Chart)
    - Accessible Bar Chart
-   - Accessible Bar Chart2
-   - Simple Bar Chart
-   - Simple Bar Chart with Facet
-   - Simple Bar Chart (Horizontal)
-   - Stacked Bar Chart
-   - MMB Bar Chart (multiple plots in one plot)
+   - Accessible Bar Chart (State Colors)
      
 ## [Boxplot Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Boxplot%20Chart)
   - Accessible Boxplot Chart
-  - Boxplot Chart
-  - Boxplot Chart with Jitter
+  - Accessible Boxplot Chart (State Colors)
     
 ## [Bump Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bump%20Plot)
   - Accessible Bump Plot
-  - Bump Plot
+  - Accessible Bump Plot (State Colors)
     
 ## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
   - Accessible Corrlation Plot
