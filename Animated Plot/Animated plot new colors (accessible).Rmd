@@ -14,6 +14,7 @@ library(mmbtools)
 # plot specific package(s)
 library(gganimate)
 library(gifski)
+library(tidytuesdayR)
 
 # accessibility package(s)
 library(colorBlindness)
@@ -23,7 +24,9 @@ mmb_load_fonts(quiet=TRUE)
 
 ```{r data}
 ## READ TIDY TUESDAY DATA ##
-earn <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-02-23/earn.csv')
+tuesdata <- tt_load('2021-02-23')
+tuesdata <- tt_load(2021, week = 9)
+earn <- tuesdata$earn
 
 ## FILTER DATA ##
 earnFiltered <- earn %>%
@@ -54,7 +57,7 @@ p <- earnFiltered %>%
         ,color="black",nudge_y=65,nudge_x=100,size=3.5
     ) +
     # formatted y-axis labels
-    scale_y_continuous(limits = c(0, 1250),labels=scales::dollar) +
+    scale_y_continuous(expand = c(0.007, 0),limits = c(0, 1250),labels=scales::dollar) +
     # shortened display text on x-axis to save space
     scale_x_continuous(labels=c("0","10,000","20,000","30,000")) +
     scale_color_manual(values=c(
