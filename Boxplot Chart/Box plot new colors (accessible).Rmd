@@ -29,11 +29,10 @@ data <- data.frame(category,n)
 ```
 
 ```{r plot}
-# create plot using default MMB color palette
-# added shapes to ensure the categories can be distinguished from each other (the dark blue and dark red colors are borderline when viewing in black and white)
 data %>%
     ggplot(aes(x=category,y=n,fill=category)) +
     geom_boxplot() +
+    scale_y_continuous(expand = c(0.007, 0),limits=c(0,100)) +
     scale_fill_manual(values=c(
         "A"="#003865","B"="#78BE21","C"="#008EAA","D"="#A4BCC2","E"="#404788","F"="#FDEC51")
     ) +

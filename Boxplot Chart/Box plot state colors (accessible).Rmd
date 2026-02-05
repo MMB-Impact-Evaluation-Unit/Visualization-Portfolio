@@ -31,7 +31,6 @@ data <- data.frame(category,n)
 
 ```{r plot}
 # create plot using default MMB color palette
-# added shapes to ensure the categories can be distinguished from each other (the dark blue and dark red colors are borderline when viewing in black and white)
 data %>%
     ggplot(aes(x=category,y=n,fill=category,pattern=category)) +
     geom_boxplot_pattern(
@@ -43,6 +42,7 @@ data %>%
         ,pattern_density = 0.05   # sets thickness of the pattern
         ,pattern_spacing = 0.04   # sets how close (or apart) the pattern is
     ) +
+    scale_y_continuous(expand = c(0.007, 0),limits=c(0,100)) +
     scale_fill_mncol() +
     scale_pattern_manual(
         "Legend"
