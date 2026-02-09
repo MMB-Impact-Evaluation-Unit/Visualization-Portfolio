@@ -1,0 +1,141 @@
+---
+title: "Diverging plot with state colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-02-05"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r packages}
+# default packages
+library(mmbtools)
+library(tidyverse)
+library(readxl)
+
+# accessibility package(s)
+library(ggpattern)
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+```{r}
+# read example data
+data <- read_excel(here::here("Code","R","Example diverging data.xlsx"))
+
+# convert to long format
+data_long <- data %>%
+    pivot_longer(
+        cols = `Strongly disagree`:`Strongly agree`
+        ,values_to = "value"
+        ,names_to = "desc"
+    )
+
+# calculate values
+calc_values <- data_long %>%
+    mutate(
+        middle_shift = sum(value[1:2])
+        ,lagged_value = lag(value, default = 0)
+        ,left = cumsum(lagged_value) - middle_shift
+        ,right = cumsum(value) - middle_shift
+        ,middle_point = (left + right) / 2
+        ,width = right - left
+        ,.by = Question
+    )
+# test plot
+calc_values %>%
+    ggplot() +
+    geom_tile(aes(x=middle_point,y=Question,width=width,fill=desc),height=0.75)
+
+# sort bars by desc
+data_factor <- calc_values %>%
+    mutate(
+        Question = factor(Question,levels = data$Question) %>% fct_rev()
+    )
+
+# test plot after sorting
+data_factor %>%
+    ggplot() +
+    geom_tile(aes(x=middle_point,y=Question,width=width,fill=desc),height=0.75)
+
+# convert question to factor
+factor_sort <- data_factor %>%
+  mutate(
+    Question = factor(Question,levels = unique(data$Question))
+  )
+```
+
+```{r}
+# set manual color palette
+colors <- c(
+    `Strongly agree` = "#003865"
+    ,Agree =  "#6688a3"
+    ,Neutral = "#D9D9D6"
+    ,Disagree = "#aed87a"
+    ,`Strongly disagree` = "#78BE21"
+)
+# set labels to use instead of a legend
+labels = c(
+    "Strongly disagree" = "Strongly\ndisagree"
+    ,"Disagree" = "Disagree"
+    ,"Neutral" = "Neutral"
+    ,"Agree" = "Agree"
+    ,"Strongly agree" = "Strongly\nagree"
+)
+```
+
+```{r plot}
+# create plot
+factor_sort %>%
+    ggplot(aes(x=middle_point,y=Question,width=width,fill=desc)) +
+    geom_tile_pattern(aes(pattern=desc),height=0.75
+        ,color="black"    # adds black border around bars
+        ,linewidth=0.5
+        ,pattern_color = "black"   # sets color of the pattern
+        ,pattern_angle = 45
+        ,pattern_density = 0.01   # sets thickness of the pattern
+        ,pattern_spacing = 0.04
+    ) +
+    geom_vline(xintercept = 0,color = "black",linewidth = 0.25) +
+    scale_x_continuous(labels = abs,n.breaks=12, limits=c(-130,130)) +
+    scale_y_discrete(expand = c(0.1, 0)) +
+    # remove legend text and manually reorder
+    scale_fill_manual("",values = colors
+        ,breaks=c("Strongly disagree","Disagree","Neutral","Agree","Strongly agree")
+    ) +
+    # remove legend text and set pattern(s)
+    scale_pattern_manual("",values = c("Strongly disagree"="none","Disagree"="none"
+        ,"Neutral"="circle","Agree"="none","Strongly agree"="none")
+    ) +
+    # add value label for strongly disagree,disagree,neutral,agree bars
+    geom_text(
+        data = factor_sort %>% filter(desc %in% c("Strongly disagree","Disagree","Neutral","Agree"))
+        ,aes(x = middle_point,y = Question,label = value)
+        ,size = 3,fontface = "bold"
+    ) +
+    # add value label for strongly agree bar
+    geom_text(
+        data = factor_sort %>% filter(desc=="Strongly agree")
+        ,aes(x = middle_point,y = Question,label = value)
+        ,size = 3,color="white",fontface = "bold"
+    ) +
+    # add label for desc at the top of the plot (instead of using a legend)
+    geom_text(data = factor_sort %>% filter(Question == "Q5")
+        ,aes(x = middle_point,y = Question,label = labels[desc]),color = "black"
+        ,nudge_y = 0.65,size = 3,fontface = "bold",vjust = 1,lineheight = 0.8
+    ) +
+    labs(x="Count of responses",y="Question") +
+    theme_mmb_accessible(
+        legend.position="none"
+    )
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Diverging plot with state colors (accessible).png",
+    width=7, # Maximum plot width should be 6.5 or 7
+    height=8 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
