@@ -34,7 +34,6 @@ data <- data.frame(category,n)
 
 ```{r plot}
 # create plot using default MMB color palette
-# added shapes to ensure the categories can be distinguished from each other (the dark blue and dark red colors are borderline when viewing in black and white)
 data %>%
     ggplot(aes(x=category,y=n,fill=category,shape=category)) +
     geom_beeswarm(size=3) +
