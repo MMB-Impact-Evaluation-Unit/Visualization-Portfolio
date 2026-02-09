@@ -10,6 +10,7 @@ editor_options:
 ## LOAD PACKAGES ##
 library(tidyverse)
 library(mmbtools)
+library(tidytuesdayR)
 
 # plot specific package
 library(ggbump)
@@ -23,7 +24,6 @@ mmb_load_fonts(quiet=TRUE)
 ```{r data}
 ## READ TIDY TUESDAY DATA ##
 tuesdata <- tt_load('2022-07-12')
-tuesdata <- tt_load(2022, week = 28)
 flights <- tuesdata$flights %>%
     janitor::clean_names()
 ```

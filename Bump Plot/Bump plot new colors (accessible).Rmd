@@ -10,10 +10,10 @@ editor_options:
 ## LOAD PACKAGES ##
 library(tidyverse)
 library(mmbtools)
+library(tidytuesdayR)
 
 # plot specific package
 library(ggbump)
-library(tidytuesdayR)
 
 # accessibility package(s)
 library(colorBlindness)
@@ -24,7 +24,6 @@ mmb_load_fonts(quiet=TRUE)
 ```{r data}
 ## READ TIDY TUESDAY DATA ##
 tuesdata <- tt_load('2022-07-12')
-tuesdata <- tt_load(2022, week = 28)
 flights <- tuesdata$flights %>%
     janitor::clean_names()
 ```
@@ -62,8 +61,6 @@ selected_countries %>%
               ,fontface = "bold",color="black") +
     scale_x_continuous(n.breaks=7) +
     scale_y_continuous(expand = c(0.05, 0),n.breaks=6) +
-    # specifying different shapes is optional with this color palette
-    #scale_shape_manual(values=c(21,22,23,24,25,21)) +
     scale_fill_manual(values=c(
         "France"="#003865","Germany"="#78BE21","Italy"="#008EAA","Spain"="#A4BCC2","Türkiye"="#404788","United Kingdom"="#FDEC51")) +
     scale_color_manual(values=c(
