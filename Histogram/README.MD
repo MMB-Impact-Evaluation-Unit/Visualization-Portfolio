@@ -1,13 +1,8 @@
 # Histogram
 Refresh the page if below visualization images are not showing**
 
-## Simple Histogram (10.31.22)
-![Simple Histogram (10 31 22)](https://drive.google.com/uc?export=view&id=19zah9dWNnMxwP_yP9q7G6PfvBy23mmbs)
-
-
 ## Accessible Histogram Plot
-![Accessible Histogram Plot](https://drive.google.com/uc?export=view&id=1gUW_d2obbnZl1HzXIqGAuytnyIDeavfc)
+![Accessible Histogram Plot](https://drive.google.com/uc?export=view&id=1g5HzmVMeUjjulIx7UrIE9lRo3-JCr1nC)
 
-
-## Accessible Histogram Plot (By Group)
-![Accessible Histogram Plot (By Group)](https://drive.google.com/uc?export=view&id=1-J0B46duAEGQr74_KW5KekhpJmSspDBR)
+## Accessible Histogram Plot (State Colors)
+![Accessible Histogram Plot (State Colors)](https://drive.google.com/uc?export=view&id=1JiLD8UnBvDkZHZFO97_m9bAmJFHEe_Lh)
