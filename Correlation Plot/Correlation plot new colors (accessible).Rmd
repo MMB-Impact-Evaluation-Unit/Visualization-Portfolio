@@ -1,0 +1,63 @@
+---
+title: "Correlation plot new colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-02-18"
+---
+
+```{r setup, include=FALSE}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+library(reshape2)
+
+# accessibility package
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+```{r data}
+# sample data : "mtcars"
+data(mtcars)
+
+# create correlation matrix
+corr <- cor(mtcars)
+
+# convert to long form
+cor_melt <- melt(corr)
+
+# add a correlation strength category
+cor_melt$category <- cut(cor_melt$value
+                        ,breaks = c(-Inf, -0.8, -0.4, 0.4, 0.8, Inf)
+                        ,labels = c("Very weak", "Weak", "Middle", "Strong", "Very strong"))
+# category a factor
+cor_melt$category <- factor(cor_melt$category, 
+                            levels = c("Very weak", "Weak", "Middle", "Strong", "Very strong"))
+# add a positive/negative sign
+cor_melt$corr_sign <- ifelse(cor_melt$value > 0, "Positive", "Negative")
+```
+
+```{r plot}
+# Create the plot  
+cor_melt %>%
+    ggplot(aes(x=Var1,y=Var2,fill=category,shape=interaction(category,corr_sign))) +
+    geom_point(size=4,color = "black") +
+    geom_text(aes(label = round(value, 2)), vjust = -1.2, size = 3,color="black") +
+    # specify fill color for each category
+    scale_fill_manual(values=c("Very weak"="#78BE21","Weak"="#FDEC51","Middle"="#A4BCC2","Strong"="#404788","Very strong"="#003865")) +
+    # specify point shape for each category/sign combination
+    scale_shape_manual(values = c(21,22,25,24,23,21)) +
+    labs(x="Variable 1",y="Variable 2",caption="Shape and color = correlation strength (positive vs. negative)") +
+    theme_mmb_accessible(legend.position = "none" )
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Correlation plot new colors (accessible).png",
+    width=6.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
