@@ -1,0 +1,118 @@
+---
+title: "Line plot state colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-02-18"
+---
+
+```{r setup, include=FALSE}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+
+# accessibility package
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+# Line
+```{r data}
+data <- data.frame(
+    Month = c("Jan", "Feb", "Mar")
+    ,"A" = c(120, 130, 125)
+    ,"B" = c(100, 105, 110)
+    ,"C" = c(80, 82, 78)
+    ,"D" = c(60, 65, 63)
+    ,"E" = c(90, 95, 97)
+    ,"F" = c(70, 75, 72)
+) %>%
+    pivot_longer(2:7, names_to = "Group",values_to = "value")
+
+month_levels <- c("Jan","Feb","Mar")
+```
+
+```{r plot}
+data %>%
+    mutate(Month = factor(Month,levels = month_levels),label = Month) %>%
+    ggplot(aes(x = Month, y = value, group = Group)) +
+    geom_line(aes(color = Group,linetype=Group),linewidth = 1.8) +
+    geom_point(aes(shape=Group,fill=Group),color = "black", stroke = 1.1, size = 4) +
+    scale_y_continuous(expand = c(0.01, 0),limits=c(60,135),n.breaks=8) +
+    scale_linetype_manual(values=c("A"=1,"B"=1,"C"=3,"D"=1,"E"=1,"F"=2)) +
+    scale_shape_manual(values = c("A"=21,"B"=21,"C"=23,"D"=21,"E"=21,"F"=22)) +
+    scale_color_manual(values=c("A"="#003865","B"="#78BE21","C"="#5D295F","D"="#008EAA","E"="#8D3F2B","F"="#0D5257")) +
+    scale_fill_manual(values=c("A"="#003865","B"="#78BE21","C"="#5D295F","D"="#008EAA","E"="#8D3F2B","F"="#0D5257")) +
+    # instead of using a legend, add labels for first and last points
+    annotate("text",x=1,y=123,label="A",color="black",size=4,fontface = "bold") +
+    annotate("text",x=1,y=103,label="B",color="black",size=4,fontface = "bold") +
+    annotate("text",x=1,y=83,label="C",color="black",size=4,fontface = "bold") +
+    annotate("text",x=1,y=63,label="D",color="black",size=4,fontface = "bold") +
+    annotate("text",x=1,y=93,label="E",color="black",size=4,fontface = "bold") +
+    annotate("text",x=1,y=73,label="F",color="black",size=4,fontface = "bold") +
+    # last point
+    annotate("text",x=3.1,y=126,label="A",color="black",size=4,fontface = "bold") +
+    annotate("text",x=3.1,y=110,label="B",color="black",size=4,fontface = "bold") +
+    annotate("text",x=3.1,y=79,label="C",color="black",size=4,fontface = "bold") +
+    annotate("text",x=3.1,y=63,label="D",color="black",size=4,fontface = "bold") +
+    annotate("text",x=3.1,y=98,label="E",color="black",size=4,fontface = "bold") +
+    annotate("text",x=3.1,y=73,label="F",color="black",size=4,fontface = "bold") +
+    labs(x="Month",y="Value") +
+    theme_mmb_accessible(legend.position="none")
+```
+
+```{r png}
+# save to PNG
+ggsave(
+    filename = "Line plot state colors (accessible).png",
+    width=6.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
+# Line with error bars
+```{r data}
+data <- data.frame(
+    Time = rep(1:5, times = 6),
+    Mean = c(10, 15, 13, 18, 20,   # Means for group A
+           9, 14, 12, 16, 19,    # Means for group B
+           8, 13, 11, 17, 18,    # Means for group C
+           7, 12, 10, 15, 17,    # Means for group D
+           6, 11, 9, 14, 16,     # Means for group E
+           5, 10, 8, 13, 14),    # Means for group F
+    SE = c(1.2, 0.8, 1.5, 0.9, 1.1,   # SE for group A
+         1.3, 0.7, 1.4, 1.0, 1.2,    # SE for group B
+         1.0, 1.1, 1.3, 0.8, 1.0,    # SE for group C
+         1.2, 0.9, 1.0, 1.2, 1.0,    # SE for group D
+         1.1, 1.3, 0.9, 1.0, 1.2,    # SE for group E
+         1.0, 1.1, 1.2, 0.8, 1.0),   # SE for group F
+    Group = rep(c("A", "B", "C", "D", "E", "F"), each = 5)  # 6 groups, each with 5 time points
+)
+
+data$Group <- factor(data$Group, levels = c("A", "B", "C","D","E","F"))
+```
+
+```{r plot}
+data %>%
+    ggplot(aes(x = Time, y = Mean, group = Group,color=Group,shape=Group)) +
+    geom_line(linewidth = 1) +
+    geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE), width = 0.4) +
+    geom_point(aes(shape=Group,fill=Group),color = "black", stroke = 0.8, size = 2) +
+    facet_wrap(~ Group, nrow = 3) +
+    scale_color_mncol() +
+    scale_fill_mncol() +
+    scale_y_continuous(expand = c(0.01, 0)) +
+    scale_shape_manual(values = c("A"=21,"B"=21,"C"=23,"D"=21,"E"=21,"F"=22)) +
+    theme_mmb_accessible(legend.position="none"
+        ,strip.text = element_text(size=12,face="bold"))
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Line error bars plot state colors (accessible).png",
+    width=6.5, # Maximum plot width should be 6.5 or 7
+    height=8 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
