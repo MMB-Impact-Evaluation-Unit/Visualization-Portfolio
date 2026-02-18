@@ -1,0 +1,82 @@
+---
+title: "Map plot new colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-02-18"
+---
+
+```{r setup, include=FALSE}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+library(readxl)
+
+# plot specific package
+library(sf)
+
+# accessibility packages
+library(ggpattern)
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+```{r data}
+county <- read_excel("Map example data.xlsx",sheet=1)
+region <- read_excel("Map example data.xlsx",sheet=2)
+```
+
+```{r mn_map}
+# GET MN STATE MAP
+mn_geography_df <- mmbtools::mn_geometry_df %>%
+    mutate(NAME = gsub(" County, Minnesota", "", NAME)
+           ,NAME = str_to_upper(NAME)) %>%
+    select(NAME)
+```
+
+# County map
+```{r plot}
+mn_geography_df %>%
+    left_join(county, by = c("NAME" = "county")) %>%
+    arrange(NAME) %>%
+    st_as_sf() %>%
+    ggplot(aes(fill=bin)) +
+    geom_sf_mmb() +
+    coord_sf() +
+    ggthemes::theme_map() +
+    scale_fill_manual("Legend",values=c("bin1"="#003865","bin2"="#78BE21","bin3"="#008EAA","bin4"="#A4BCC2","bin5"="#404788","bin6"="#FDEC51")) +
+    theme_mmb_map()
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "County map plot new colors (accessible).png",
+    width=5.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
+# Region map
+```{r plot}
+mn_geography_df %>%
+    left_join(region, by = c("NAME" = "county")) %>%
+    arrange(NAME) %>%
+    st_as_sf() %>%
+    ggplot(aes(fill=region)) +
+    geom_sf_mmb() +
+    coord_sf() +
+    ggthemes::theme_map() +
+    scale_fill_manual("Region",values=c("Central"="#003865","Metro"="#78BE21","Northeast"="#008EAA","Northwest"="#A4BCC2","Southeast"="#404788","Southwest"="#FDEC51")) +
+    theme_mmb_map()
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Region map plot new colors (accessible).png",
+    width=5.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```

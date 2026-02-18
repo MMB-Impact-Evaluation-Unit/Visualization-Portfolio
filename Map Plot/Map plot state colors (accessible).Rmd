@@ -1,0 +1,112 @@
+---
+title: "Map plot state colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-02-18"
+---
+
+```{r setup, include=FALSE}
+## LOAD PACKAGES ##
+library(tidyverse)
+library(mmbtools)
+library(readxl)
+
+# plot specific package
+library(sf)
+
+# accessibility packages
+library(ggpattern)
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+```{r data}
+county <- read_excel("Map example data.xlsx",sheet=1)
+region <- read_excel("Map example data.xlsx",sheet=2)
+```
+
+```{r mn_map}
+# GET MN STATE MAP
+mn_geography_df <- mmbtools::mn_geometry_df %>%
+    mutate(NAME = gsub(" County, Minnesota", "", NAME)
+           ,NAME = str_to_upper(NAME)) %>%
+    select(NAME)
+```
+
+# County map
+```{r plot}
+mn_geography_df %>%
+    left_join(county, by = c("NAME" = "county")) %>%
+    arrange(NAME) %>%
+    st_as_sf() %>%
+    ggplot(aes(fill=bin,pattern=bin,pattern_color=bin)) +
+    geom_sf_pattern(
+        color="black",pattern_size = 0.5,pattern_angle = 45
+        ,pattern_density = 0.05   # sets thickness of the pattern
+        ,pattern_spacing = 0.03  # sets how close (or apart) the pattern is
+    ) +
+    coord_sf() +
+    ggthemes::theme_map() +
+    scale_fill_mncol() +
+    # specify pattern for each category (note: the teal blue color is probably accessible without the pattern, but it is borderline so adding a pattern makes it definitively accessible)
+    scale_pattern_manual(values=c("bin1"="none","bin2"="none","bin3"="none","bin4"="none","bin5"="stripe","bin6"="circle")) +
+    # specify pattern color for each category
+    scale_pattern_color_manual(values=c("bin1"="#003865","bin2"="#78BE21","bin3"="#8D3F2B","bin4"="#5D295F","bin5"="black","bin6"="white")) +
+    # add matching pattern and color to the legend
+    guides(fill = guide_legend("Legend",override.aes = list(
+                               pattern = c("none","none","none","none","stripe","circle"),
+                               pattern_spacing = .02,pattern_density = 0.03,pattern_angle = c(0,0,0,0,45,45)))
+        ,pattern = guide_legend("Legend")
+        ,pattern_color = guide_legend("Legend")
+    ) +
+    theme_mmb_map()
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "County map plot state colors (accessible).png",
+    width=5.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
+# Region map
+```{r plot}
+mn_geography_df %>%
+    left_join(region, by = c("NAME" = "county")) %>%
+    arrange(NAME) %>%
+    st_as_sf() %>%
+    ggplot(aes(fill=region,pattern=region,pattern_color=region)) +
+    geom_sf_pattern(
+        color="black",pattern_size = 0.5,pattern_angle = 45
+        ,pattern_density = 0.05   # sets thickness of the pattern
+        ,pattern_spacing = 0.03  # sets how close (or apart) the pattern is
+    ) +
+    coord_sf() +
+    ggthemes::theme_map() +
+    scale_fill_mncol() +
+    # specify pattern for each category (note: the teal blue color is probably accessible without the pattern, but it is borderline so adding a pattern makes it definitively accessible)
+    scale_pattern_manual(values=c("Central"="none","Metro"="none","Northeast"="none","Northwest"="none","Southeast"="stripe","Southwest"="circle")) +
+    # specify pattern color for each category
+    scale_pattern_color_manual(values=c("Central"="#003865","Metro"="#78BE21","Northeast"="#8D3F2B","Northwest"="#5D295F","Southeast"="black","Southwest"="white")) +
+    # add matching pattern and color to the legend
+    guides(fill = guide_legend("Region",override.aes = list(
+                               pattern = c("none","none","none","none","stripe","circle"),
+                               pattern_spacing = .02,pattern_density = 0.03,pattern_angle = c(0,0,0,0,45,45)))
+        ,pattern = guide_legend("Region")
+        ,pattern_color = guide_legend("Region")
+    ) +
+    theme_mmb_map()
+```
+
+```{r}
+# save to PNG
+ggsave(
+    filename = "Region map plot state colors (accessible).png",
+    width=5.5, # Maximum plot width should be 6.5 or 7
+    height=7 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
