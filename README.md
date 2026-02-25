@@ -22,11 +22,7 @@
     
 ## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
   - Accessible Corrlation Plot
-  - Simple Correlation Plot (Square)
-  - Simple Correlation Plot (Circle)
-  - Simple Correlation Plot (Upper Triangle)
-  - Simple Correlation Plot (Lower Triangle)
-  - Simple Correlation Plot (MMB Themes)
+  - Accessible Corrlation Plot (State Colors)
     
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
   - Accessible Diverging Plot
@@ -34,30 +30,27 @@
   - Diverging Plot (HH package)
     
 ## [Histogram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Histogram)
-  - Simple Histogram
-  - Simple Histogram (By group)
-  - Ridgeline Histogram Plot
   - Accessible Histogram
-  - Accessible Histogram (By group)
+  - Accessible Histogram (State Colors_
     
 ## [Interactive Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Interactive%20Plot)
-  - Interactive Plot
-  - Accessible Interactive Plot (static)
+
     
 ## [Line Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Line%20Chart)
-  - Simple Line Chart
-  - Simple Line Chart Grouped by Variable
-  - Line Chart By Group With Confidence Intervals
   - Accessible Line Chart
-  - Accessible Point Plot with Error Bars
+  - Accessible Line Chart with Error Bars
+  - Accessible Line Chart (State Colors)
+  - Accessible Line Chart with Error Bars (State Colors)
     
 ## [Lollipop Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Lollipop%20Chart)
   - Lollipop Chart1
   - Lollipop Chart2
     
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
-  - Basic Map (State Map Using MMB Colors)
-  - Accessible MMB Map
+  - Accessible MN County Map
+  - Accessible MN Region Map
+  - Accessible MN County Map (State Colors)
+  - Accessible MN Region Map (State Colors)
 
 ## [Radar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Radar%20Plot)
    - Radar Chart
