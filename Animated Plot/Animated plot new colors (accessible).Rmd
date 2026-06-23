@@ -1,7 +1,7 @@
 ---
 title: "Animated plot new colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-02-18"
+date: "2026-06-23"
 ---
 
 ```{r packages, include=FALSE}
@@ -28,12 +28,12 @@ earn <- tuesdata$earn
 ## FILTER DATA ##
 earnFiltered <- earn %>%
     mutate(year = as.integer(year)) %>%
-    filter(age %in% c("16 to 24 years","25 to 34 years","35 to 44 years","45 to 54 years", "55 to 64 years","65 years and over")) %>%
-    filter(sex=="Both Sexes") %>%
-    filter(race=="All Races") %>%
-    filter(ethnic_origin=="All Origins") %>%
-    filter(quarter==1) %>%
-    select(c(4,5,7,8))
+    filter(age %in% c("16 to 24 years", "25 to 34 years", "35 to 44 years",
+        "45 to 54 years", "55 to 64 years", "65 years and over")) %>%
+    filter(sex == "Both Sexes" & race == "All Races" & ethnic_origin == "All Origins") %>%
+    filter(quarter == 1) %>%
+    select(c(4,5,7,8)) %>%
+    rename(`Age Group` = age)
 
 age_levels <- c("16 to 24 years",
     "25 to 34 years",
@@ -46,31 +46,37 @@ age_levels <- c("16 to 24 years",
 
 ```{r static}
 p <- earnFiltered %>%
-    mutate(age = factor(age,levels = age_levels),label = as.character(age)) %>%
-    ggplot(aes(x=n_persons,y=median_weekly_earn,color=age,fill=age)) +
-    geom_point(size=5,shape=22,color="black",stroke=0.7) +
+    mutate(`Age Group` = factor(`Age Group`, levels = age_levels), label = as.character(`Age Group`)) %>%
+    ggplot(aes(x = n_persons, y = median_weekly_earn, color = `Age Group`, fill = `Age Group`)) +
+    geom_point(size = 5, shape = 21, color = "black", stroke = 0.7) +
     # format y-axis labels
-    scale_y_continuous(expand = c(0.007, 0),limits = c(0, 1250),labels=scales::dollar) +
+    scale_y_continuous(expand = c(0.007, 0), limits = c(0, 1250), labels = scales::dollar) +
     # shortened display text on x-axis to save space
-    scale_x_continuous(labels=c("0","10,000","20,000","30,000")) +
-    scale_color_manual("Age group",values=c("16 to 24 years"="#003865","25 to 34 years"="#78BE21","35 to 44 years"="#008EAA","45 to 54 years"="#A4BCC2","55 to 64 years"="#404788","65 years and over"="#FDEC51"),breaks = age_levels,limits = age_levels) +
-    scale_fill_manual("Age group",values=c("16 to 24 years"="#003865","25 to 34 years"="#78BE21","35 to 44 years"="#008EAA","45 to 54 years"="#A4BCC2","55 to 64 years"="#404788","65 years and over"="#FDEC51"),breaks = age_levels,limits = age_levels) +
-    labs(subtitle="Year: {frame_along}",x = "Number of persons (in thousands)",y = "Median weekly earnings") +
+    scale_x_continuous(labels = c("0", "10,000", "20,000", "30,000")) +
+    scale_color_manual(values = c(
+        "16 to 24 years" = "#003865", "25 to 34 years" = "#78BE21", "35 to 44 years" = "#008EAA",
+        "45 to 54 years" = "#A4BCC2", "55 to 64 years" = "#404788", "65 years and over" = "#FDEC51"),
+        breaks = age_levels, limits = age_levels) +
+    scale_fill_manual(values = c(
+        "16 to 24 years" = "#003865", "25 to 34 years" = "#78BE21", "35 to 44 years" = "#008EAA",
+        "45 to 54 years" = "#A4BCC2", "55 to 64 years" = "#404788", "65 years and over" = "#FDEC51"),
+        breaks = age_levels, limits = age_levels) +
+    labs(subtitle="Year: {frame_time}", x = "Number of people (in thousands)", y = "Median weekly earnings") +
     theme_mmb_accessible(legend.position = "bottom")
 ```
 
-```{r animate}
-p_anim <- p + transition_reveal(year)
-```
+```{r animate_plot}
+p_anim <- p + transition_time(year) + ease_aes("linear")
 
-```{r}
 animate(
     p_anim
     ,nframes = 80 # this controls transition speed (higher numbers slow down the speed)
     ,width = 650
     ,height = 425
 )
+```
 
+```{r save_plot}
 ## SAVE ANIMATION AS GIF ##
 anim_save("Animated plot new colors (accessible).gif")
 ```
