@@ -1,7 +1,7 @@
 ---
 title: "Bar plot state colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-02-18"
+date: "2026-06-23"
 ---
 
 ```{r}
@@ -17,6 +17,7 @@ mmb_load_fonts(quiet=TRUE)
 ```
 
 ```{r data}
+set.seed(2026)
 category <- c("A","B","C","D","E","F")
 
 n <- sample(1:100, length(category), replace = TRUE)
@@ -24,23 +25,43 @@ n <- sample(1:100, length(category), replace = TRUE)
 data <- data.frame(category,n)
 ```
 
-```{r plot}
-# Display bar chart
+```{r}
+# Basic plot structure for an accessible bar plot using patterns and default MN colors
+# requires R package ggpattern
 data %>%
-    # order category/groups by count
-    mutate(category = fct_reorder(category,-n)) %>%
-    ggplot(aes(x=category,y=n,fill=category,pattern=category,pattern_color=category)) +
-    geom_col_pattern(
-        position = "dodge",color="black"    # adds black border around bars
-        ,pattern_angle = 45,pattern_density = 0.05   # sets thickness of the pattern
-        ,pattern_spacing = 0.03) +  # sets how close (or apart) the pattern is 
-    scale_y_continuous(expand = c(0.007, 0),limits=c(0,100)) +
-    scale_fill_mncol() +
-    # specify pattern for each category
+    ggplot(aes(x = category, y = n,
+        fill = category,    # specify the variable for fill
+        pattern = category,    # specify the variable for pattern
+        # uncomment this pattern_color option to specify the variable for pattern_color
+            # only used in conjunction with scale_pattern_color_manual()
+        pattern_color = category
+    )) +
+    geom_col_pattern(position = "dodge",
+        color = "black",    # adds black border around bars
+        # uncomment this pattern_color option to set a single color for all patterns;
+            # otherwise, you can define a different pattern_color by group with scale_pattern_color_manual()
+        #pattern_color = "color",
+        pattern_angle = 45,    # sets pattern angle in the plot. default is 45 degrees
+        pattern_density = 0.05,    # sets pattern thickness in the plot. default is 0.05 (adjust as needed)
+        pattern_spacing = 0.03    # sets pattern distance in the plot. default is 0.03 (adjust as needed)
+    ) +
+    # reduces the gap between x-axis and first tick mark on the y-axis. default is 0.007 (adjust as needed)
+    scale_y_continuous(expand = c(0.007, 0), limits = c(0,100)) +
+    scale_fill_mncol() +    # use default MN color palette
+    # specifies the pattern for each group. pattern options are none, stripe, circle, and crosshatch
     scale_pattern_manual(values = c("A"="none","B"="none","C"="none","D"="none","E"="stripe","F"="circle")) +
-    # specify pattern color for each category
+    # uncomment the code below if you want to specify a different pattern_color for each group
+        # if a group doesn't have a pattern specified, you can use NA or specify the fill color
     scale_pattern_color_manual(values=c("A"="#003865","D"="#78BE21","C"="#5D295F","B"="#8D3F2B","E"="black","F"="white")) +
+    # uncomment the code below to add matching patterns to the legend (if the legend is displayed)
+    #guides(fill = guide_legend("legend_title",override.aes = list(
+            #pattern = c("pattern_type",...),    # specify the pattern for each group. the order must match scale_pattern_manual()
+            #pattern_spacing = 0.02,    # specify pattern distance. default is 0.02 (adjust as needed)
+            #pattern_density = 0.03,    # specify pattern thickness. default is 0.03 (adjust as needed)
+            #pattern_angle = c(angle_value,...)))    # specify pattern angle for each group. 0 for no pattern, 45 for pattern
+    #) +
     labs(x="Category", y="Value") +
+    # legend position default is 'none' (adjust as needed)
     theme_mmb_accessible(legend.position = "none")
 ```
 
