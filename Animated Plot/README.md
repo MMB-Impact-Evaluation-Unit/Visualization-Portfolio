@@ -4,5 +4,5 @@ Refresh the page if below visualization images are not showing**
 ./images/animated-plot-new-colors.gif
 
 # Accessible Animated Plot (state colors)
-./images/Animated-plot-state-colors.gif
+./images/animated-plot-state-colors.gif
 
