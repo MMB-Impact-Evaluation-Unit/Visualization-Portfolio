@@ -2,7 +2,7 @@
 
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
 ### Accessible Animated Plot
-./Animated%20Plot/Animated-plot-new-colors.gif
+./Animated Plot/Animated-plot-new-colors.gif
 
 ### Accessible Animated Plot (State Colors)
 
