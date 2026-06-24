@@ -4,4 +4,4 @@ Refresh the page if below visualization images are not showing**
 <img width="650" height="425" alt="Beeswarm plot using new accessible color palette" src="https://drive.google.com/uc?export=view&id=1lxd789j5zxPjEfAF-qQaDvkD1pDNUekb" />
 
 ## Accessible Beeswarm Plot (state colors)
-<img width="650" height="425" alt="Beeswarm plot using accessible state color palette" src="https://drive.google.com/uc?export=view&id=1bjaF3zY3NWsKG1vL00MbCC3j1X40J-Pq" />
+<img width="650" height="425" alt="Beeswarm plot using accessible state color palette" src="https://drive.google.com/uc?export=view&id=1pNml3R8davDZBHQkYTWbY6AX1uXPAz9j" />
