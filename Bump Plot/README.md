@@ -5,4 +5,4 @@ Refresh the page if below visualization images are not showing**
 
 
 # Accessible Bump Plot (state colors)
-<img width="650" height="425" alt="Bump plot using accessible state color palette" src="https://drive.google.com/uc?export=view&id=<File ID>" />
+<img width="650" height="425" alt="Bump plot using accessible state color palette" src="https://drive.google.com/uc?export=view&id=11J-jR7eqiyLky5amlP8ECcyeICotPTc8" />
