@@ -25,9 +25,8 @@
   - Accessible Corrlation Plot (state colors)
     
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
-  - Accessible Diverging Plot
-  - Diverging Plot (likert package)
-  - Diverging Plot (HH package)
+  - Accessible Diverging Plot (v1)
+  - Accessible Diverging Plot (v2)
     
 ## [Histogram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Histogram)
   - Accessible Histogram (new colors)
