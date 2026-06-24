@@ -1,7 +1,9 @@
 ---
 title: "Bar plot new colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-06-23"
+date: "2026-06-24"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
@@ -38,7 +40,7 @@ data %>%
 ```{r}
 # Save plot to PNG file
 ggsave(
-    filename = "Bar plot new colors (accessible).png",
+    filename = "Bar plot new colors.png",
     width=6.5, # Maximum plot width
     height=7 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
