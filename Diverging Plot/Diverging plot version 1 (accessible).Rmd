@@ -1,5 +1,5 @@
 ---
-title: "Diverging plot with new colors (accessible)"
+title: "Diverging plot version 1 (accessible)"
 author: "Katie Kotasek"
 date: "2026-06-24"
 editor_options: 
