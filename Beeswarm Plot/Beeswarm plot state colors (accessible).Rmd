@@ -2,6 +2,8 @@
 title: "Beeswarm plot state colors (accessible)"
 author: "Katie Kotasek"
 date: "2026-06-24"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -36,7 +38,7 @@ data %>%
     ggplot(aes(x=category,y=n,fill=category,shape=category)) +
     geom_beeswarm(size=3) +
     scale_y_continuous(expand = c(0.007, 0),limits=c(60,70),n.breaks=8) +
-    scale_shape_manual(values=c(21,22,23,24,21,25)) +
+    scale_shape_manual(values=c(21,21,21,21,22,24)) +
     scale_fill_mncol() +
     labs(x = "Category", y="Value") +
     theme_mmb_accessible(legend.position = "none")
@@ -45,7 +47,7 @@ data %>%
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Beeswarm plot state colors (accessible).png",
+    filename = "Beeswarm plot state colors.png",
     width=6.5, # Maximum plot width should be 6.5 or 7
     height=7 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
