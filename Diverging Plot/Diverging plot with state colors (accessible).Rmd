@@ -1,7 +1,9 @@
 ---
 title: "Diverging plot with state colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-02-18"
+date: "2026-06-24"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r packages}
@@ -11,7 +13,6 @@ library(tidyverse)
 library(readxl)
 
 # accessibility packages
-library(ggpattern)
 library(colorBlindness)
 
 mmb_load_fonts(quiet=TRUE)
@@ -67,10 +68,11 @@ factor_sort <- data_factor %>%
 # set manual color palette
 colors <- c(
     `Strongly agree` = "#003865"
-    ,Agree =  "#6688a3"
+    #,Agree =  "#6688a3" # 40% lighter than the dark blue
+    ,Agree =  "#336084" # 20% lighter than the dark blue
     ,Neutral = "#D9D9D6"
-    ,Disagree = "#aed87a"
-    ,`Strongly disagree` = "#78BE21"
+    ,Disagree = "#ed9c4d" # 30% lighter than the orange
+    ,`Strongly disagree` = "#E57200"
 )
 # set labels to use instead of a legend
 labels = c(
@@ -86,26 +88,20 @@ labels = c(
 # create plot
 factor_sort %>%
     ggplot(aes(x=middle_point,y=Question,width=width,fill=desc)) +
-    geom_tile_pattern(aes(pattern=desc),height=0.75
-        ,color="black"    # adds black border around bars
-        ,linewidth=0.5,pattern_color = "black"   # sets color of the pattern
-        ,pattern_angle = 45,pattern_density = 0.01   # sets thickness of the pattern
-        ,pattern_spacing = 0.04) +
-    geom_vline(xintercept = 0,color = "black",linewidth = 0.25) +
-    scale_x_continuous(labels = abs,n.breaks=12, limits=c(-130,130)) +
+    geom_tile(height=0.75,color="black",linewidth=0.5) +
+    geom_vline(xintercept = 0,color = "black",linewidth = 0.5) +
+    scale_x_continuous(labels = abs,n.breaks=12, limits=c(-140,140)) +
     # format y-axis labels
     scale_y_discrete(expand = c(0.1, 0)) +
     # remove legend text and manually reorder
     scale_fill_manual("",values = colors,breaks=c("Strongly disagree","Disagree","Neutral","Agree","Strongly agree")) +
-    # remove legend text and set pattern(s)
-    scale_pattern_manual("",values = c("Strongly disagree"="none","Disagree"="none","Neutral"="circle","Agree"="none","Strongly agree"="none")) +
     # add value label for strongly disagree,disagree,neutral,agree bars
     geom_text(
-        data = factor_sort %>% filter(desc %in% c("Strongly disagree","Disagree","Neutral","Agree"))
+        data = factor_sort %>% filter(desc %in% c("Strongly disagree","Disagree","Neutral"))
         ,aes(x = middle_point,y = Question,label = value),size = 3,fontface = "bold") +
     # add value label for strongly agree bar
     geom_text(
-        data = factor_sort %>% filter(desc=="Strongly agree")
+        data = factor_sort %>% filter(desc %in% c("Strongly agree","Agree"))
         ,aes(x = middle_point,y = Question,label = value),size = 3,color="white",fontface = "bold") +
     # add label for desc at the top of the plot (instead of using a legend)
     geom_text(data = factor_sort %>% filter(Question == "Q5")
@@ -117,7 +113,7 @@ factor_sort %>%
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Diverging plot with state colors (accessible).png",
+    filename = "Diverging plot state colors.png",
     width=7, # Maximum plot width should be 6.5 or 7
     height=8 * 10/16, # Scale this however you want. Current is 16:10
     units="in"

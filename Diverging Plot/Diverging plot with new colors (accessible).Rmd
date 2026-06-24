@@ -1,7 +1,9 @@
 ---
 title: "Diverging plot with new colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-02-18"
+date: "2026-06-24"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r packages}
@@ -18,7 +20,7 @@ mmb_load_fonts(quiet=TRUE)
 
 ```{r}
 # read example data
-data <- read_excel(here::here("Code","R","Example diverging data.xlsx"))
+data <- read_excel(here::here("Code", "R", "Example diverging data.xlsx"))
 
 # convert to long format
 data_long <- data %>%
@@ -67,8 +69,8 @@ factor_sort <- data_factor %>%
 colors <- c(
     `Strongly agree` = "#003865"
     ,Agree =  "#404788"
-    ,Neutral = "#A4BCC2"
-    ,Disagree = "#FDEC51"
+    ,Neutral = "#B6C9CE"  # 20% lighter than the light gray blue
+    ,Disagree = "#93CB4D" # 20% lighter than the lime green
     ,`Strongly disagree` = "#78BE21"
 )
 # set labels to use instead of a legend
@@ -86,14 +88,12 @@ labels = c(
 factor_sort %>%
     ggplot(aes(x=middle_point,y=Question,width=width,fill=desc)) +
     geom_tile(height=0.75,color="black",linewidth=0.5) +
-    geom_vline(xintercept = 0,color = "black",linewidth = 0.25) +
+    geom_vline(xintercept = 0,color = "black",linewidth = 0.5) +
     scale_x_continuous(labels = abs,n.breaks=12, limits=c(-140,140)) +
     # format y-axis labels
     scale_y_discrete(expand = c(0.1, 0)) +
     # remove legend text and manually reorder
     scale_fill_manual("",values = colors,breaks=c("Strongly disagree","Disagree","Neutral","Agree","Strongly agree")) +
-    # remove legend text and set pattern(s)
-    scale_pattern_manual("",values = c("Strongly disagree"="none","Disagree"="none","Neutral"="circle","Agree"="none","Strongly agree"="none")) +
     # add value label for strongly disagree,disagree,neutral,agree bars
     geom_text(
         data = factor_sort %>% filter(desc %in% c("Strongly disagree","Disagree","Neutral"))
@@ -112,7 +112,7 @@ factor_sort %>%
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Diverging plot with new colors (accessible).png",
+    filename = "Diverging plot new colors.png",
     width=7, # Maximum plot width should be 6.5 or 7
     height=8 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
