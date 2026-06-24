@@ -2,6 +2,8 @@
 title: "Box plot state colors (accessible)"
 author: "Katie Kotasek"
 date: "2026-06-24"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
@@ -48,7 +50,7 @@ data %>%
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Box plot state colors (accessible).png",
+    filename = "Box plot state colors.png",
     width=6.5, # Maximum plot width should be 6.5 or 7
     height=7 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
