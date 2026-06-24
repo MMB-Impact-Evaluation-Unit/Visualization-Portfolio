@@ -2,7 +2,7 @@
 Refresh the page if below visualization images are not showing**
 
 ## Accessible Bar Chart (new colors)
-
+<img width="650" height="425" alt="Bar chart using new accessible color palette" src="https://drive.google.com/uc?export=view&id=1snfc4YJEufcmZdm-lHBlOsOut-prU5gx" />
 
 
 ## Accessible Bar Chart (state colors)
