@@ -1,28 +1,28 @@
 # Visualization Portfolio Index
 
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
-  - Accessible Animated Plot
-  - Accessible Animated Plot (State Colors)
+  - Accessible Animated Plot (new colors)
+  - Accessible Animated Plot (state colors)
 
 ## [Beeswarm Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Beeswarm%20Plot)
-  - Accessible Beeswarm Plot
-  - Accessible Beeswarm Plot (State Colors)
+  - Accessible Beeswarm Plot (new colors)
+  - Accessible Beeswarm Plot (state colors)
     
 ## [Bar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bar%20Chart)
-   - Accessible Bar Chart
-   - Accessible Bar Chart (State Colors)
+   - Accessible Bar Chart (new colors)
+   - Accessible Bar Chart (state colors)
      
 ## [Boxplot Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Boxplot%20Chart)
-  - Accessible Boxplot Chart
-  - Accessible Boxplot Chart (State Colors)
+  - Accessible Boxplot Chart (new colors)
+  - Accessible Boxplot Chart (state colors)
     
 ## [Bump Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Bump%20Plot)
-  - Accessible Bump Plot
-  - Accessible Bump Plot (State Colors)
+  - Accessible Bump Plot (new colors)
+  - Accessible Bump Plot (state colors)
     
 ## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
-  - Accessible Corrlation Plot
-  - Accessible Corrlation Plot (State Colors)
+  - Accessible Corrlation Plot (new colors)
+  - Accessible Corrlation Plot (state colors)
     
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
   - Accessible Diverging Plot
@@ -30,16 +30,16 @@
   - Diverging Plot (HH package)
     
 ## [Histogram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Histogram)
-  - Accessible Histogram
-  - Accessible Histogram (State Colors_
+  - Accessible Histogram (new colors)
+  - Accessible Histogram (state colors)
     
 ## [Interactive Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Interactive%20Plot)
 
     
 ## [Line Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Line%20Chart)
-  - Accessible Line Chart
+  - Accessible Line Chart (new colors)
   - Accessible Line Chart with Error Bars
-  - Accessible Line Chart (State Colors)
+  - Accessible Line Chart (state colors)
   - Accessible Line Chart with Error Bars (State Colors)
     
 ## [Lollipop Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Lollipop%20Chart)
@@ -49,8 +49,8 @@
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
   - Accessible MN County Map
   - Accessible MN Region Map
-  - Accessible MN County Map (State Colors)
-  - Accessible MN Region Map (State Colors)
+  - Accessible MN County Map (state colors)
+  - Accessible MN Region Map (state colors)
 
 ## [Radar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Radar%20Plot)
    - Radar Chart
