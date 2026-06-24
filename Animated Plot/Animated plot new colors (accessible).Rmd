@@ -2,13 +2,14 @@
 title: "Animated plot new colors (accessible)"
 author: "Katie Kotasek"
 date: "2026-06-23"
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r packages, include=FALSE}
 ## LOAD PACKAGES ##
 library(tidyverse)
 library(mmbtools)
-library(tidytuesdayR)
 
 # plot specific packages
 library(gganimate)
@@ -22,8 +23,7 @@ mmb_load_fonts(quiet=TRUE)
 
 ```{r data}
 ## READ TIDY TUESDAY DATA ##
-tuesdata <- tt_load('2021-02-23')
-earn <- tuesdata$earn
+earn <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2021/2021-02-23/earn.csv')
 
 ## FILTER DATA ##
 earnFiltered <- earn %>%
@@ -70,14 +70,15 @@ p_anim <- p + transition_time(year) + ease_aes("linear")
 
 animate(
     p_anim
-    ,nframes = 80 # this controls transition speed (higher numbers slow down the speed)
-    ,width = 650
-    ,height = 425
+    ,nframes = 75 # this controls transition speed (higher numbers slow down the speed)
+    ,width = 1200
+    ,height = 800
+    ,res = 150  # sharpen text
 )
 ```
 
 ```{r save_plot}
 ## SAVE ANIMATION AS GIF ##
-anim_save("Animated plot new colors (accessible).gif")
+anim_save("Animated plot new colors.gif")
 ```
 
