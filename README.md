@@ -32,10 +32,7 @@ This repository stores examples of common data visualization types and implement
 ## [Histogram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Histogram)
   - Accessible Histogram (new colors)
   - Accessible Histogram (state colors)
-    
-## [Interactive Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Interactive%20Plot)
-
-    
+ 
 ## [Line Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Line%20Chart)
   - Accessible Line Chart (new colors)
   - Accessible Line Chart with Error Bars (new colors)
