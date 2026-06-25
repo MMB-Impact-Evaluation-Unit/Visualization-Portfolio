@@ -1,5 +1,5 @@
 # Visualization Portfolio Index
-This repository stores examples of common data visualization types and implements accessibility whenever and to the extent possible. All of the code contained is in R, but other formats are welcome. Below is a list of the data visualization types and the examples provided.
+This repository stores examples of common data visualization types and implements accessibility whenever and to the extent possible. All of the code contained is in R, but other formats are welcome. Below is a list of the data visualization types.
 
 ## [Animated Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Animated%20Plot)
   - Accessible Animated Plot (new colors)
