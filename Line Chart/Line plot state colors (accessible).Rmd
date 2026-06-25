@@ -1,11 +1,11 @@
 ---
 title: "Line plot state colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-02-18"
+date: "2026-06-25"
 ---
 
-```{r setup, include=FALSE}
-## LOAD PACKAGES ##
+```{r packages}
+# general packages
 library(tidyverse)
 library(mmbtools)
 
@@ -38,10 +38,10 @@ data %>%
     geom_line(aes(color = Group,linetype=Group),linewidth = 1.8) +
     geom_point(aes(shape=Group,fill=Group),color = "black", stroke = 1.1, size = 4) +
     scale_y_continuous(expand = c(0.01, 0),limits=c(60,135),n.breaks=8) +
-    scale_linetype_manual(values=c("A"=1,"B"=1,"C"=3,"D"=1,"E"=1,"F"=2)) +
-    scale_shape_manual(values = c("A"=21,"B"=21,"C"=23,"D"=21,"E"=21,"F"=22)) +
     scale_color_mncol() +
     scale_fill_mncol() +
+    scale_linetype_manual(values=c("A" = 1,"B" = 1,"C" = 1,"D" = 1,"E" = 2,"F" = 3)) +
+    scale_shape_manual(values = c("A" = 21,"B" = 21,"C" = 21,"D" = 21,"E" = 22,"F" = 23)) +
     # instead of using a legend, add labels for first and last points
     annotate("text",x=1,y=123,label="A",color="black",size=4,fontface = "bold") +
     annotate("text",x=1,y=103,label="B",color="black",size=4,fontface = "bold") +
@@ -63,7 +63,7 @@ data %>%
 ```{r png}
 # save to PNG
 ggsave(
-    filename = "Line plot state colors (accessible).png",
+    filename = "Line plot state colors.png",
     width=6.5, # Maximum plot width should be 6.5 or 7
     height=7 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
@@ -95,22 +95,25 @@ data$Group <- factor(data$Group, levels = c("A", "B", "C","D","E","F"))
 ```{r plot}
 data %>%
     ggplot(aes(x = Time, y = Mean, group = Group,color=Group,shape=Group)) +
-    geom_line(linewidth = 1) +
-    geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE), width = 0.4) +
-    geom_point(aes(shape=Group,fill=Group),color = "black", stroke = 0.8, size = 2) +
+    geom_line(aes(linetype=Group), linewidth = 1.5) +
+    geom_errorbar(aes(ymin = Mean - SE, ymax = Mean + SE), width = 0.4, linewidth = 0.5) +
+    geom_point(aes(shape=Group,fill=Group),color = "black", stroke = 0.8, size = 3) +
     facet_wrap(~ Group, nrow = 3) +
     scale_color_mncol() +
     scale_fill_mncol() +
     scale_y_continuous(expand = c(0.01, 0)) +
-    scale_shape_manual(values = c("A"=21,"B"=21,"C"=23,"D"=21,"E"=21,"F"=22)) +
-    theme_mmb_accessible(legend.position="none"
-        ,strip.text = element_text(size=12,face="bold"))
+    scale_linetype_manual(values=c("A" = 1,"B" = 1,"C" = 1,"D" = 1,"E" = 2,"F" = 3)) +
+    scale_shape_manual(values = c("A"=21,"B"=21,"C"=21,"D"=21,"E"=22,"F"=23)) +
+    theme_mmb_accessible(
+        legend.position="none"
+        ,strip.text = element_text(size=12,face="bold")
+    )
 ```
 
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Line error bars plot state colors (accessible).png",
+    filename = "Line plot error bars state colors.png",
     width=6.5, # Maximum plot width should be 6.5 or 7
     height=8 * 10/16, # Scale this however you want. Current is 16:10
     units="in"

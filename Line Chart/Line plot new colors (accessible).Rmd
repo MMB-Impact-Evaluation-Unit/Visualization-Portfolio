@@ -1,11 +1,11 @@
 ---
 title: "Line plot new colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-02-18"
+date: "2026-06-25"
 ---
 
-```{r setup, include=FALSE}
-## LOAD PACKAGES ##
+```{r packages}
+# general packages
 library(tidyverse)
 library(mmbtools)
 
@@ -62,7 +62,7 @@ data %>%
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Line plot new colors (accessible).png",
+    filename = "Line plot new colors.png",
     width=6.5, # Maximum plot width should be 6.5 or 7
     height=7 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
@@ -108,7 +108,7 @@ data %>%
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Line error bars plot new colors (accessible).png",
+    filename = "Line plot error bars new colors.png",
     width=6.5, # Maximum plot width should be 6.5 or 7
     height=8 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
