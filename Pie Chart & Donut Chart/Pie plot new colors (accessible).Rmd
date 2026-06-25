@@ -1,0 +1,134 @@
+---
+title: "Pie plot new colors (accessible)"
+author: "Katie Kotasek"
+date: "2026-06-25"
+---
+
+```{r packages}
+# general packages
+library(tidyverse)
+library(mmbtools)
+
+# accessibility package
+library(colorBlindness)
+
+mmb_load_fonts(quiet=TRUE)
+```
+
+# Pie
+```{r data}
+pie_data <- data.frame(
+    desc = c("Cat1","Cat2","Cat3","Cat4","Cat5","Cat6")
+    ,value = c(40,20,15,10,10,5)
+) %>%
+    arrange(desc(desc)) %>%
+    mutate(
+        fraction = value / sum(value)
+        ,ymax = cumsum(fraction)
+        ,ymin = c(0, head(ymax, n = -1))
+        ,ypos = ((ymax + ymin) / 2)*100
+        ,label = paste0(desc, ": ", value,"%")
+        # set custom angle value for each category
+        ,angle_value = case_when(
+            desc=="Cat1" ~ 0
+            ,desc=="Cat2" ~ 0
+            ,desc=="Cat3" ~ 0
+            ,desc=="Cat4" ~ 0
+            ,desc=="Cat5" ~ 0
+            ,desc=="Cat6" ~ 270
+        )
+  )
+```
+
+```{r plot}
+pie_data %>%
+    ggplot(aes(x="",y=value,fill=desc,color=desc)) +
+    geom_bar(color="black",stat = "identity") +
+    ggrepel::geom_text_repel(aes(y=ypos,label=label,angle=angle_value),size=2,nudge_x=c(0.2,0.2,0.2,0.2,0.2,0.2),segment.color="transparent",fontface="bold") +
+    scale_fill_manual(values=c("Cat1"="#003865","Cat2"="#78BE21","Cat3"="#A4BCC2","Cat4"="#008EAA","Cat5"="#404788","Cat6"="#fdec51")) +
+    scale_color_manual(values=c("Cat1"="white","Cat2"="black","Cat3"="black","Cat4"="black","Cat5"="white","Cat6"="black")) +
+    coord_polar("y") +
+    theme_mmb_accessible(
+        legend.position = "none"
+        ,axis.text.x = element_blank()
+        ,axis.text.y = element_blank()
+        ,axis.ticks.x = element_blank()
+        ,axis.ticks.y = element_blank()
+        ,axis.title.x = element_blank()
+        ,axis.title.y = element_blank()
+        ,axis.line = element_blank()
+    )
+```
+
+```{r png}
+# save to PNG
+ggsave(
+    filename = "Pie plot new colors.png",
+    width=4.5, # Maximum plot width should be 6.5 or 7
+    height=4.5 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
+
+# Donut
+```{r data}
+donut_data <- data.frame(
+    desc = c("Cat1","Cat2","Cat3","Cat4","Cat5","Cat6")
+    ,value = c(40,20,15,10,10,5)
+) %>%
+    arrange(desc(desc)) %>%
+    mutate(
+        fraction = value / sum(value)
+        ,ymax = cumsum(fraction)
+        ,ymin = c(0, head(ymax, n = -1))
+        ,ypos = ((ymax + ymin) / 2)
+        ,label = paste0(desc, ": ", value,"%")
+        # set custom x position value for each category
+        ,x_value = case_when(
+            desc=="Cat1" ~ 3.4
+            ,desc=="Cat2" ~ 3.4
+            ,desc=="Cat3" ~ 3.4
+            ,desc=="Cat4" ~ 3.55
+            ,desc=="Cat5" ~ 3.5
+            ,desc=="Cat6" ~ 3.47)
+        # set custom angle value for each category
+        ,angle_value = case_when(
+            desc=="Cat1" ~ 0
+            ,desc=="Cat2" ~ 0
+            ,desc=="Cat3" ~ 0
+            ,desc=="Cat4" ~ 0
+            ,desc=="Cat5" ~ 0
+            ,desc=="Cat6" ~ 270)
+  )
+```
+
+```{r plot}
+donut_data %>%
+    ggplot(aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3,fill=desc,color=desc)) +
+    geom_rect(color="black",stat = "identity") +
+    ggrepel::geom_text_repel(aes(x=x_value,y=ypos,label=label,angle=angle_value),size=2,segment.color="transparent",fontface="bold") +
+    scale_fill_manual(values=c("Cat1"="#003865","Cat2"="#78BE21","Cat3"="#A4BCC2","Cat4"="#008EAA","Cat5"="#404788","Cat6"="#fdec51")) +
+    scale_color_manual(values=c("Cat1"="white","Cat2"="black","Cat3"="black","Cat4"="black","Cat5"="white","Cat6"="black")) +
+    coord_polar("y") +
+    xlim(c(2, 4)) +  # Creates the "hole" in the center for donut
+    theme_mmb_accessible(
+        legend.position = "none"
+        ,axis.text.x = element_blank()
+        ,axis.text.y = element_blank()
+        ,axis.ticks.x = element_blank()
+        ,axis.ticks.y = element_blank()
+        ,axis.title.x = element_blank()
+        ,axis.title.y = element_blank()
+        ,axis.line = element_blank()
+    )
+```
+
+```{r png}
+# save to PNG
+ggsave(
+    filename = "Donut plot new colors.png",
+    width=5, # Maximum plot width should be 6.5 or 7
+    height=5 * 10/16, # Scale this however you want. Current is 16:10
+    units="in"
+)
+```
