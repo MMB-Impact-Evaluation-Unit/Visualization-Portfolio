@@ -1,9 +1,7 @@
 Refresh the page if below visualization images are not showing**
 
-## Lollipop 1
+## Accessible Lollipop Chart (v1)
+TBD
 
-
-## Lollipop 2
-
-
-## Accessible Lollipop Chart
+## Accessible Lollipop Chart (v2)
+TBD
