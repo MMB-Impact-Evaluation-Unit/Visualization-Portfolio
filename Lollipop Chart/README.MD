@@ -1,10 +1,9 @@
 Refresh the page if below visualization images are not showing**
 
 ## Lollipop 1
-![Lollipop Chart1 (10 19 22)](https://drive.google.com/uc?export=view&id=1oYgZ_sdROShIWVr68uCReh7ANrYassqO)
+
 
 ## Lollipop 2
-![Lollipop Chart (3 14 23)](https://drive.google.com/uc?export=view&id=10EWolGXES0pov6f5s4mI4a-uEZoWQVJq)
+
 
 ## Accessible Lollipop Chart
-![Accessible Lollipop Chart](https://drive.google.com/uc?export=view&id=1FCXvGLTGm4kc0rB27T-kIAVDbolThucS)
