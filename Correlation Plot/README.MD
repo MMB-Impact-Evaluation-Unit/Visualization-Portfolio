@@ -1,8 +1,8 @@
 Refresh the page if below visualization images are not showing**
 
-## Accessible Corrlation Plot
+## Accessible Corrlation Plot (v1)
 TBD
 
 
-## Accessible Correlation Plot (State colors)
+## Accessible Correlation Plot (v2)
 TBD
