@@ -21,8 +21,8 @@ mmb_load_fonts(quiet=TRUE)
 ```
 
 ```{r data}
-county <- read_excel("Map example data.xlsx",sheet=1)
-region <- read_excel("Map example data.xlsx",sheet=2)
+county <- read_excel("Example map data.xlsx",sheet=1)
+region <- read_excel("Example map data.xlsx",sheet=2)
 ```
 
 ```{r mn_map}
