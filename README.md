@@ -21,7 +21,7 @@ This repository stores examples of common data visualization types and implement
   - Accessible Bump Plot (new colors)
   - Accessible Bump Plot (state colors)
     
-## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
+## [Correlogram Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlogram%20Plot)
 
     
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
@@ -65,6 +65,9 @@ This repository stores examples of common data visualization types and implement
 ## [Scatter plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Scatter%20Plot)
 
     
+## [Tables](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Tables)
+
+
 ## [Venn Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Venn%20Diagram)
 
 
