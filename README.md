@@ -22,8 +22,7 @@ This repository stores examples of common data visualization types and implement
   - Accessible Bump Plot (state colors)
     
 ## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
-  - Accessible Corrlation Plot (v1)
-  - Accessible Corrlation Plot (v2)
+
     
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
   - Accessible Diverging Plot (v1)
@@ -40,8 +39,7 @@ This repository stores examples of common data visualization types and implement
   - Accessible Line Chart with Error Bars (State Colors)
     
 ## [Lollipop Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Lollipop%20Chart)
-  - Accessible Lollipop Chart (v1)
-  - Accessible Lollipop Chart (v2)
+ 
     
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
   - Accessible MN County Map (new colors)
@@ -50,10 +48,10 @@ This repository stores examples of common data visualization types and implement
   - Accessible MN Region Map (state colors)
 
 ## [Radar Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Radar%20Plot)
-   - Radar Chart
+
     
 ## [Ridgeline Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Ridgeline%20Plot)
-   - Simple Ridgeline Plot
+  
      
 ## [Pie Chart & Donut Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Pie%20Chart%20%26%20Donut%20Chart)
   - Accessible Pie Chart (new colors)
@@ -62,21 +60,16 @@ This repository stores examples of common data visualization types and implement
   - Accessible Donut Chart (state colors)
     
 ## [Sankey Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Sankey%20Diagram)
-  - Sankey Diagram
+
     
 ## [Scatter plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Scatter%20Plot)
-  - Simple Scatter Plot
-  - Scatter Plot with a line
-  - Scatter Plot with a regression line
+
     
 ## [Venn Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Venn%20Diagram)
-  - 2 ring Venn Diagram
-  - 3 ring Venn Diagram
-  - 4 ring Venn Diagram
+
 
 ## [Violin Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Violin%20Plot)
-  - Violin Plot
+
 
 ## [Waffle Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Waffle%20Plot)
-  - Waffle Plot
-  - Accessible Waffle Plot
+
