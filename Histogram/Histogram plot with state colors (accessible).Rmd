@@ -1,11 +1,11 @@
 ---
 title: "Histogram plot with state colors (accessible)"
 author: "Katie Kotasek"
-date: "2026-02-18"
+date: "2026-06-25"
 ---
 
 ```{r packages}
-# default packages
+# general packages
 library(mmbtools)
 library(tidyverse)
 
@@ -50,7 +50,7 @@ data %>%
 ```{r}
 # save to PNG
 ggsave(
-    filename = "Histogram plot with state colors (accessible).png",
+    filename = "Histogram plot with state colors.png",
     width=7, # Maximum plot width should be 6.5 or 7
     height=7 * 10/16, # Scale this however you want. Current is 16:10
     units="in"
