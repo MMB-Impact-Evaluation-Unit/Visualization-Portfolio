@@ -21,8 +21,8 @@
   - Accessible Bump Plot (state colors)
     
 ## [Correlation Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Correlation%20Plot)
-  - Accessible Corrlation Plot (new colors)
-  - Accessible Corrlation Plot (state colors)
+  - Accessible Corrlation Plot (v1)
+  - Accessible Corrlation Plot (v2)
     
 ## [Diverging Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Diverging%20Plot)
   - Accessible Diverging Plot (v1)
@@ -37,17 +37,17 @@
     
 ## [Line Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Line%20Chart)
   - Accessible Line Chart (new colors)
-  - Accessible Line Chart with Error Bars
+  - Accessible Line Chart with Error Bars (new colors)
   - Accessible Line Chart (state colors)
   - Accessible Line Chart with Error Bars (State Colors)
     
 ## [Lollipop Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Lollipop%20Chart)
-  - Lollipop Chart1
-  - Lollipop Chart2
+  - Accessible Lollipop Chart (v1)
+  - Accessible Lollipop Chart (v2)
     
 ## [Map Plot](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Map%20Plot)
-  - Accessible MN County Map
-  - Accessible MN Region Map
+  - Accessible MN County Map (new colors)
+  - Accessible MN Region Map (new colors)
   - Accessible MN County Map (state colors)
   - Accessible MN Region Map (state colors)
 
@@ -58,10 +58,10 @@
    - Simple Ridgeline Plot
      
 ## [Pie Chart & Donut Chart](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Pie%20Chart%20%26%20Donut%20Chart)
-  - Pie Chart
-  - Donut Chart
-  - Accessible Pie Chart
-  - Accessible Donut Chart
+  - Accessible Pie Chart (new colors)
+  - Accessible Donut Chart (new colors)
+  - Accessible Pie Chart (state colors)
+  - Accessible Donut Chart (state colors)
     
 ## [Sankey Diagram](https://github.com/mmbimpact/Visualization-Portfolio/tree/main/Sankey%20Diagram)
   - Sankey Diagram
