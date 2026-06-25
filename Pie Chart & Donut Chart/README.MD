@@ -14,4 +14,4 @@ Refresh the page if below visualization images are not showing**
 
 
 ## Accessible Donut Chart (state colors)
-<img width="425" height="425" alt="Donut chart using accessible state color palette" src="https://drive.google.com/uc?export=view&id=1l_lpRldIE04ZRdxAHkGHcQCG_4o3tWLB" />
+<img width="450" height="425" alt="Donut chart using accessible state color palette" src="https://drive.google.com/uc?export=view&id=1l_lpRldIE04ZRdxAHkGHcQCG_4o3tWLB" />
